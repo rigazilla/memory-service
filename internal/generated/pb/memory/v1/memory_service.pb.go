@@ -2149,6 +2149,518 @@ func (x *AdminListEntriesRequest) GetUpToEntryId() []byte {
 	return nil
 }
 
+type AdminGetConversationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conversation identifier (UUID as 16-byte big-endian binary)
+	ConversationId []byte `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AdminGetConversationRequest) Reset() {
+	*x = AdminGetConversationRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminGetConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminGetConversationRequest) ProtoMessage() {}
+
+func (x *AdminGetConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminGetConversationRequest.ProtoReflect.Descriptor instead.
+func (*AdminGetConversationRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *AdminGetConversationRequest) GetConversationId() []byte {
+	if x != nil {
+		return x.ConversationId
+	}
+	return nil
+}
+
+type AdminListConversationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Page  *PageRequest           `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"`
+	// Optional: filter by owner user ID
+	OwnerUserId *string `protobuf:"bytes,2,opt,name=owner_user_id,json=ownerUserId,proto3,oneof" json:"owner_user_id,omitempty"`
+	// Optional: filter by client ID
+	ClientId *string `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3,oneof" json:"client_id,omitempty"`
+	// Optional: filter by agent ID
+	AgentId *string `protobuf:"bytes,4,opt,name=agent_id,json=agentId,proto3,oneof" json:"agent_id,omitempty"`
+	// Optional: archive filter (exclude, include, only)
+	Archived *ArchiveFilter `protobuf:"varint,5,opt,name=archived,proto3,enum=memory.v1.ArchiveFilter,oneof" json:"archived,omitempty"`
+	// Optional: conversation list mode (all, roots, latest_fork)
+	Mode *ConversationListMode `protobuf:"varint,6,opt,name=mode,proto3,enum=memory.v1.ConversationListMode,oneof" json:"mode,omitempty"`
+	// Optional: conversation ancestry filter (roots, children, all)
+	Ancestry      *ConversationAncestryFilter `protobuf:"varint,7,opt,name=ancestry,proto3,enum=memory.v1.ConversationAncestryFilter,oneof" json:"ancestry,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminListConversationsRequest) Reset() {
+	*x = AdminListConversationsRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListConversationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListConversationsRequest) ProtoMessage() {}
+
+func (x *AdminListConversationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListConversationsRequest.ProtoReflect.Descriptor instead.
+func (*AdminListConversationsRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *AdminListConversationsRequest) GetPage() *PageRequest {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+func (x *AdminListConversationsRequest) GetOwnerUserId() string {
+	if x != nil && x.OwnerUserId != nil {
+		return *x.OwnerUserId
+	}
+	return ""
+}
+
+func (x *AdminListConversationsRequest) GetClientId() string {
+	if x != nil && x.ClientId != nil {
+		return *x.ClientId
+	}
+	return ""
+}
+
+func (x *AdminListConversationsRequest) GetAgentId() string {
+	if x != nil && x.AgentId != nil {
+		return *x.AgentId
+	}
+	return ""
+}
+
+func (x *AdminListConversationsRequest) GetArchived() ArchiveFilter {
+	if x != nil && x.Archived != nil {
+		return *x.Archived
+	}
+	return ArchiveFilter_ARCHIVE_FILTER_UNSPECIFIED
+}
+
+func (x *AdminListConversationsRequest) GetMode() ConversationListMode {
+	if x != nil && x.Mode != nil {
+		return *x.Mode
+	}
+	return ConversationListMode_CONVERSATION_LIST_MODE_UNSPECIFIED
+}
+
+func (x *AdminListConversationsRequest) GetAncestry() ConversationAncestryFilter {
+	if x != nil && x.Ancestry != nil {
+		return *x.Ancestry
+	}
+	return ConversationAncestryFilter_CONVERSATION_ANCESTRY_FILTER_UNSPECIFIED
+}
+
+type AdminListConversationsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Conversations []*ConversationSummary `protobuf:"bytes,1,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	PageInfo      *PageInfo              `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminListConversationsResponse) Reset() {
+	*x = AdminListConversationsResponse{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListConversationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListConversationsResponse) ProtoMessage() {}
+
+func (x *AdminListConversationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListConversationsResponse.ProtoReflect.Descriptor instead.
+func (*AdminListConversationsResponse) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *AdminListConversationsResponse) GetConversations() []*ConversationSummary {
+	if x != nil {
+		return x.Conversations
+	}
+	return nil
+}
+
+func (x *AdminListConversationsResponse) GetPageInfo() *PageInfo {
+	if x != nil {
+		return x.PageInfo
+	}
+	return nil
+}
+
+type AdminUpdateConversationRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conversation identifier (UUID as 16-byte big-endian binary)
+	ConversationId []byte `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	// Set archive state (true = archive, false = restore)
+	Archived      *bool `protobuf:"varint,2,opt,name=archived,proto3,oneof" json:"archived,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminUpdateConversationRequest) Reset() {
+	*x = AdminUpdateConversationRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminUpdateConversationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminUpdateConversationRequest) ProtoMessage() {}
+
+func (x *AdminUpdateConversationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminUpdateConversationRequest.ProtoReflect.Descriptor instead.
+func (*AdminUpdateConversationRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *AdminUpdateConversationRequest) GetConversationId() []byte {
+	if x != nil {
+		return x.ConversationId
+	}
+	return nil
+}
+
+func (x *AdminUpdateConversationRequest) GetArchived() bool {
+	if x != nil && x.Archived != nil {
+		return *x.Archived
+	}
+	return false
+}
+
+type AdminListMembershipsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conversation identifier (UUID as 16-byte big-endian binary)
+	ConversationId []byte       `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Page           *PageRequest `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AdminListMembershipsRequest) Reset() {
+	*x = AdminListMembershipsRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListMembershipsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListMembershipsRequest) ProtoMessage() {}
+
+func (x *AdminListMembershipsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListMembershipsRequest.ProtoReflect.Descriptor instead.
+func (*AdminListMembershipsRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *AdminListMembershipsRequest) GetConversationId() []byte {
+	if x != nil {
+		return x.ConversationId
+	}
+	return nil
+}
+
+func (x *AdminListMembershipsRequest) GetPage() *PageRequest {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type AdminListForksRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conversation identifier (UUID as 16-byte big-endian binary)
+	ConversationId []byte       `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Page           *PageRequest `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AdminListForksRequest) Reset() {
+	*x = AdminListForksRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListForksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListForksRequest) ProtoMessage() {}
+
+func (x *AdminListForksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListForksRequest.ProtoReflect.Descriptor instead.
+func (*AdminListForksRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *AdminListForksRequest) GetConversationId() []byte {
+	if x != nil {
+		return x.ConversationId
+	}
+	return nil
+}
+
+func (x *AdminListForksRequest) GetPage() *PageRequest {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type AdminListForksResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Forks         []*ConversationForkSummary `protobuf:"bytes,1,rep,name=forks,proto3" json:"forks,omitempty"`
+	PageInfo      *PageInfo                  `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminListForksResponse) Reset() {
+	*x = AdminListForksResponse{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListForksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListForksResponse) ProtoMessage() {}
+
+func (x *AdminListForksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListForksResponse.ProtoReflect.Descriptor instead.
+func (*AdminListForksResponse) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *AdminListForksResponse) GetForks() []*ConversationForkSummary {
+	if x != nil {
+		return x.Forks
+	}
+	return nil
+}
+
+func (x *AdminListForksResponse) GetPageInfo() *PageInfo {
+	if x != nil {
+		return x.PageInfo
+	}
+	return nil
+}
+
+type AdminListChildConversationsRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Conversation identifier (UUID as 16-byte big-endian binary)
+	ConversationId []byte       `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	Page           *PageRequest `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *AdminListChildConversationsRequest) Reset() {
+	*x = AdminListChildConversationsRequest{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListChildConversationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListChildConversationsRequest) ProtoMessage() {}
+
+func (x *AdminListChildConversationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListChildConversationsRequest.ProtoReflect.Descriptor instead.
+func (*AdminListChildConversationsRequest) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *AdminListChildConversationsRequest) GetConversationId() []byte {
+	if x != nil {
+		return x.ConversationId
+	}
+	return nil
+}
+
+func (x *AdminListChildConversationsRequest) GetPage() *PageRequest {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+type AdminListChildConversationsResponse struct {
+	state         protoimpl.MessageState      `protogen:"open.v1"`
+	Children      []*ChildConversationSummary `protobuf:"bytes,1,rep,name=children,proto3" json:"children,omitempty"`
+	PageInfo      *PageInfo                   `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AdminListChildConversationsResponse) Reset() {
+	*x = AdminListChildConversationsResponse{}
+	mi := &file_memory_v1_memory_service_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AdminListChildConversationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AdminListChildConversationsResponse) ProtoMessage() {}
+
+func (x *AdminListChildConversationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_memory_v1_memory_service_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AdminListChildConversationsResponse.ProtoReflect.Descriptor instead.
+func (*AdminListChildConversationsResponse) Descriptor() ([]byte, []int) {
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *AdminListChildConversationsResponse) GetChildren() []*ChildConversationSummary {
+	if x != nil {
+		return x.Children
+	}
+	return nil
+}
+
+func (x *AdminListChildConversationsResponse) GetPageInfo() *PageInfo {
+	if x != nil {
+		return x.PageInfo
+	}
+	return nil
+}
+
 type Entry struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Unique identifier (UUID as 16-byte big-endian binary)
@@ -2177,7 +2689,7 @@ type Entry struct {
 
 func (x *Entry) Reset() {
 	*x = Entry{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[23]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2189,7 +2701,7 @@ func (x *Entry) String() string {
 func (*Entry) ProtoMessage() {}
 
 func (x *Entry) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[23]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2202,7 +2714,7 @@ func (x *Entry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Entry.ProtoReflect.Descriptor instead.
 func (*Entry) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{23}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Entry) GetId() []byte {
@@ -2272,7 +2784,7 @@ type ListMembershipsRequest struct {
 
 func (x *ListMembershipsRequest) Reset() {
 	*x = ListMembershipsRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[24]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2284,7 +2796,7 @@ func (x *ListMembershipsRequest) String() string {
 func (*ListMembershipsRequest) ProtoMessage() {}
 
 func (x *ListMembershipsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[24]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2297,7 +2809,7 @@ func (x *ListMembershipsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMembershipsRequest.ProtoReflect.Descriptor instead.
 func (*ListMembershipsRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{24}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListMembershipsRequest) GetConversationId() []byte {
@@ -2324,7 +2836,7 @@ type ListMembershipsResponse struct {
 
 func (x *ListMembershipsResponse) Reset() {
 	*x = ListMembershipsResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[25]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2336,7 +2848,7 @@ func (x *ListMembershipsResponse) String() string {
 func (*ListMembershipsResponse) ProtoMessage() {}
 
 func (x *ListMembershipsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[25]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2349,7 +2861,7 @@ func (x *ListMembershipsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMembershipsResponse.ProtoReflect.Descriptor instead.
 func (*ListMembershipsResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{25}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListMembershipsResponse) GetMemberships() []*ConversationMembership {
@@ -2378,7 +2890,7 @@ type ShareConversationRequest struct {
 
 func (x *ShareConversationRequest) Reset() {
 	*x = ShareConversationRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[26]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2390,7 +2902,7 @@ func (x *ShareConversationRequest) String() string {
 func (*ShareConversationRequest) ProtoMessage() {}
 
 func (x *ShareConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[26]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2403,7 +2915,7 @@ func (x *ShareConversationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ShareConversationRequest.ProtoReflect.Descriptor instead.
 func (*ShareConversationRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{26}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ShareConversationRequest) GetConversationId() []byte {
@@ -2439,7 +2951,7 @@ type UpdateMembershipRequest struct {
 
 func (x *UpdateMembershipRequest) Reset() {
 	*x = UpdateMembershipRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[27]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2451,7 +2963,7 @@ func (x *UpdateMembershipRequest) String() string {
 func (*UpdateMembershipRequest) ProtoMessage() {}
 
 func (x *UpdateMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[27]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2464,7 +2976,7 @@ func (x *UpdateMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMembershipRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{27}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *UpdateMembershipRequest) GetConversationId() []byte {
@@ -2499,7 +3011,7 @@ type DeleteMembershipRequest struct {
 
 func (x *DeleteMembershipRequest) Reset() {
 	*x = DeleteMembershipRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[28]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2511,7 +3023,7 @@ func (x *DeleteMembershipRequest) String() string {
 func (*DeleteMembershipRequest) ProtoMessage() {}
 
 func (x *DeleteMembershipRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[28]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2524,7 +3036,7 @@ func (x *DeleteMembershipRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteMembershipRequest.ProtoReflect.Descriptor instead.
 func (*DeleteMembershipRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{28}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *DeleteMembershipRequest) GetConversationId() []byte {
@@ -2558,7 +3070,7 @@ type OwnershipTransfer struct {
 
 func (x *OwnershipTransfer) Reset() {
 	*x = OwnershipTransfer{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[29]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2570,7 +3082,7 @@ func (x *OwnershipTransfer) String() string {
 func (*OwnershipTransfer) ProtoMessage() {}
 
 func (x *OwnershipTransfer) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[29]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2583,7 +3095,7 @@ func (x *OwnershipTransfer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OwnershipTransfer.ProtoReflect.Descriptor instead.
 func (*OwnershipTransfer) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{29}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *OwnershipTransfer) GetId() []byte {
@@ -2638,7 +3150,7 @@ type ListOwnershipTransfersRequest struct {
 
 func (x *ListOwnershipTransfersRequest) Reset() {
 	*x = ListOwnershipTransfersRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[30]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2650,7 +3162,7 @@ func (x *ListOwnershipTransfersRequest) String() string {
 func (*ListOwnershipTransfersRequest) ProtoMessage() {}
 
 func (x *ListOwnershipTransfersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[30]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2663,7 +3175,7 @@ func (x *ListOwnershipTransfersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOwnershipTransfersRequest.ProtoReflect.Descriptor instead.
 func (*ListOwnershipTransfersRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{30}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ListOwnershipTransfersRequest) GetRole() TransferRole {
@@ -2690,7 +3202,7 @@ type ListOwnershipTransfersResponse struct {
 
 func (x *ListOwnershipTransfersResponse) Reset() {
 	*x = ListOwnershipTransfersResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[31]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2702,7 +3214,7 @@ func (x *ListOwnershipTransfersResponse) String() string {
 func (*ListOwnershipTransfersResponse) ProtoMessage() {}
 
 func (x *ListOwnershipTransfersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[31]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2715,7 +3227,7 @@ func (x *ListOwnershipTransfersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOwnershipTransfersResponse.ProtoReflect.Descriptor instead.
 func (*ListOwnershipTransfersResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{31}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ListOwnershipTransfersResponse) GetTransfers() []*OwnershipTransfer {
@@ -2742,7 +3254,7 @@ type GetOwnershipTransferRequest struct {
 
 func (x *GetOwnershipTransferRequest) Reset() {
 	*x = GetOwnershipTransferRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[32]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2754,7 +3266,7 @@ func (x *GetOwnershipTransferRequest) String() string {
 func (*GetOwnershipTransferRequest) ProtoMessage() {}
 
 func (x *GetOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[32]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2767,7 +3279,7 @@ func (x *GetOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOwnershipTransferRequest.ProtoReflect.Descriptor instead.
 func (*GetOwnershipTransferRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{32}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetOwnershipTransferRequest) GetTransferId() []byte {
@@ -2788,7 +3300,7 @@ type CreateOwnershipTransferRequest struct {
 
 func (x *CreateOwnershipTransferRequest) Reset() {
 	*x = CreateOwnershipTransferRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[33]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2800,7 +3312,7 @@ func (x *CreateOwnershipTransferRequest) String() string {
 func (*CreateOwnershipTransferRequest) ProtoMessage() {}
 
 func (x *CreateOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[33]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2813,7 +3325,7 @@ func (x *CreateOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOwnershipTransferRequest.ProtoReflect.Descriptor instead.
 func (*CreateOwnershipTransferRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{33}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *CreateOwnershipTransferRequest) GetConversationId() []byte {
@@ -2840,7 +3352,7 @@ type AcceptOwnershipTransferRequest struct {
 
 func (x *AcceptOwnershipTransferRequest) Reset() {
 	*x = AcceptOwnershipTransferRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[34]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2852,7 +3364,7 @@ func (x *AcceptOwnershipTransferRequest) String() string {
 func (*AcceptOwnershipTransferRequest) ProtoMessage() {}
 
 func (x *AcceptOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[34]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2865,7 +3377,7 @@ func (x *AcceptOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AcceptOwnershipTransferRequest.ProtoReflect.Descriptor instead.
 func (*AcceptOwnershipTransferRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{34}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *AcceptOwnershipTransferRequest) GetTransferId() []byte {
@@ -2885,7 +3397,7 @@ type DeleteOwnershipTransferRequest struct {
 
 func (x *DeleteOwnershipTransferRequest) Reset() {
 	*x = DeleteOwnershipTransferRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[35]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2897,7 +3409,7 @@ func (x *DeleteOwnershipTransferRequest) String() string {
 func (*DeleteOwnershipTransferRequest) ProtoMessage() {}
 
 func (x *DeleteOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[35]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2910,7 +3422,7 @@ func (x *DeleteOwnershipTransferRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOwnershipTransferRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOwnershipTransferRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{35}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *DeleteOwnershipTransferRequest) GetTransferId() []byte {
@@ -2935,7 +3447,7 @@ type SearchEntriesRequest struct {
 
 func (x *SearchEntriesRequest) Reset() {
 	*x = SearchEntriesRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[36]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2947,7 +3459,7 @@ func (x *SearchEntriesRequest) String() string {
 func (*SearchEntriesRequest) ProtoMessage() {}
 
 func (x *SearchEntriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[36]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2960,7 +3472,7 @@ func (x *SearchEntriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchEntriesRequest.ProtoReflect.Descriptor instead.
 func (*SearchEntriesRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{36}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *SearchEntriesRequest) GetQuery() string {
@@ -3001,7 +3513,7 @@ type SearchEntriesResponse struct {
 
 func (x *SearchEntriesResponse) Reset() {
 	*x = SearchEntriesResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[37]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3013,7 +3525,7 @@ func (x *SearchEntriesResponse) String() string {
 func (*SearchEntriesResponse) ProtoMessage() {}
 
 func (x *SearchEntriesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[37]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3026,7 +3538,7 @@ func (x *SearchEntriesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchEntriesResponse.ProtoReflect.Descriptor instead.
 func (*SearchEntriesResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{37}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *SearchEntriesResponse) GetResults() []*SearchResult {
@@ -3061,7 +3573,7 @@ type SearchResult struct {
 
 func (x *SearchResult) Reset() {
 	*x = SearchResult{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[38]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3073,7 +3585,7 @@ func (x *SearchResult) String() string {
 func (*SearchResult) ProtoMessage() {}
 
 func (x *SearchResult) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[38]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3086,7 +3598,7 @@ func (x *SearchResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResult.ProtoReflect.Descriptor instead.
 func (*SearchResult) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{38}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *SearchResult) GetConversationId() []byte {
@@ -3141,7 +3653,7 @@ type IndexConversationsRequest struct {
 
 func (x *IndexConversationsRequest) Reset() {
 	*x = IndexConversationsRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[39]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3153,7 +3665,7 @@ func (x *IndexConversationsRequest) String() string {
 func (*IndexConversationsRequest) ProtoMessage() {}
 
 func (x *IndexConversationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[39]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3166,7 +3678,7 @@ func (x *IndexConversationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexConversationsRequest.ProtoReflect.Descriptor instead.
 func (*IndexConversationsRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{39}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *IndexConversationsRequest) GetEntries() []*IndexEntryRequest {
@@ -3190,7 +3702,7 @@ type IndexEntryRequest struct {
 
 func (x *IndexEntryRequest) Reset() {
 	*x = IndexEntryRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[40]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3202,7 +3714,7 @@ func (x *IndexEntryRequest) String() string {
 func (*IndexEntryRequest) ProtoMessage() {}
 
 func (x *IndexEntryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[40]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3215,7 +3727,7 @@ func (x *IndexEntryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexEntryRequest.ProtoReflect.Descriptor instead.
 func (*IndexEntryRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{40}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *IndexEntryRequest) GetConversationId() []byte {
@@ -3249,7 +3761,7 @@ type IndexConversationsResponse struct {
 
 func (x *IndexConversationsResponse) Reset() {
 	*x = IndexConversationsResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[41]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3261,7 +3773,7 @@ func (x *IndexConversationsResponse) String() string {
 func (*IndexConversationsResponse) ProtoMessage() {}
 
 func (x *IndexConversationsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[41]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3274,7 +3786,7 @@ func (x *IndexConversationsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IndexConversationsResponse.ProtoReflect.Descriptor instead.
 func (*IndexConversationsResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{41}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *IndexConversationsResponse) GetIndexed() int32 {
@@ -3295,7 +3807,7 @@ type ListUnindexedEntriesRequest struct {
 
 func (x *ListUnindexedEntriesRequest) Reset() {
 	*x = ListUnindexedEntriesRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[42]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3307,7 +3819,7 @@ func (x *ListUnindexedEntriesRequest) String() string {
 func (*ListUnindexedEntriesRequest) ProtoMessage() {}
 
 func (x *ListUnindexedEntriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[42]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3320,7 +3832,7 @@ func (x *ListUnindexedEntriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUnindexedEntriesRequest.ProtoReflect.Descriptor instead.
 func (*ListUnindexedEntriesRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{42}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *ListUnindexedEntriesRequest) GetLimit() int32 {
@@ -3348,7 +3860,7 @@ type ListUnindexedEntriesResponse struct {
 
 func (x *ListUnindexedEntriesResponse) Reset() {
 	*x = ListUnindexedEntriesResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[43]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3360,7 +3872,7 @@ func (x *ListUnindexedEntriesResponse) String() string {
 func (*ListUnindexedEntriesResponse) ProtoMessage() {}
 
 func (x *ListUnindexedEntriesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[43]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3373,7 +3885,7 @@ func (x *ListUnindexedEntriesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUnindexedEntriesResponse.ProtoReflect.Descriptor instead.
 func (*ListUnindexedEntriesResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{43}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *ListUnindexedEntriesResponse) GetEntries() []*UnindexedEntry {
@@ -3401,7 +3913,7 @@ type UnindexedEntry struct {
 
 func (x *UnindexedEntry) Reset() {
 	*x = UnindexedEntry{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[44]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3413,7 +3925,7 @@ func (x *UnindexedEntry) String() string {
 func (*UnindexedEntry) ProtoMessage() {}
 
 func (x *UnindexedEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[44]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3426,7 +3938,7 @@ func (x *UnindexedEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnindexedEntry.ProtoReflect.Descriptor instead.
 func (*UnindexedEntry) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{44}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *UnindexedEntry) GetConversationId() []byte {
@@ -3459,7 +3971,7 @@ type PutMemoryRequest struct {
 
 func (x *PutMemoryRequest) Reset() {
 	*x = PutMemoryRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[45]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3471,7 +3983,7 @@ func (x *PutMemoryRequest) String() string {
 func (*PutMemoryRequest) ProtoMessage() {}
 
 func (x *PutMemoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[45]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3484,7 +3996,7 @@ func (x *PutMemoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PutMemoryRequest.ProtoReflect.Descriptor instead.
 func (*PutMemoryRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{45}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *PutMemoryRequest) GetNamespace() []string {
@@ -3552,7 +4064,7 @@ type MemoryWriteResult struct {
 
 func (x *MemoryWriteResult) Reset() {
 	*x = MemoryWriteResult{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[46]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3564,7 +4076,7 @@ func (x *MemoryWriteResult) String() string {
 func (*MemoryWriteResult) ProtoMessage() {}
 
 func (x *MemoryWriteResult) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[46]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3577,7 +4089,7 @@ func (x *MemoryWriteResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryWriteResult.ProtoReflect.Descriptor instead.
 func (*MemoryWriteResult) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{46}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *MemoryWriteResult) GetId() []byte {
@@ -3642,7 +4154,7 @@ type GetMemoryRequest struct {
 
 func (x *GetMemoryRequest) Reset() {
 	*x = GetMemoryRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[47]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3654,7 +4166,7 @@ func (x *GetMemoryRequest) String() string {
 func (*GetMemoryRequest) ProtoMessage() {}
 
 func (x *GetMemoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[47]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3667,7 +4179,7 @@ func (x *GetMemoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMemoryRequest.ProtoReflect.Descriptor instead.
 func (*GetMemoryRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{47}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *GetMemoryRequest) GetNamespace() []string {
@@ -3718,7 +4230,7 @@ type UpdateMemoryRequest struct {
 
 func (x *UpdateMemoryRequest) Reset() {
 	*x = UpdateMemoryRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[48]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3730,7 +4242,7 @@ func (x *UpdateMemoryRequest) String() string {
 func (*UpdateMemoryRequest) ProtoMessage() {}
 
 func (x *UpdateMemoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[48]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3743,7 +4255,7 @@ func (x *UpdateMemoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMemoryRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMemoryRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{48}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *UpdateMemoryRequest) GetNamespace() []string {
@@ -3801,7 +4313,7 @@ type MemoryItem struct {
 
 func (x *MemoryItem) Reset() {
 	*x = MemoryItem{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[49]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3813,7 +4325,7 @@ func (x *MemoryItem) String() string {
 func (*MemoryItem) ProtoMessage() {}
 
 func (x *MemoryItem) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[49]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3826,7 +4338,7 @@ func (x *MemoryItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryItem.ProtoReflect.Descriptor instead.
 func (*MemoryItem) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{49}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *MemoryItem) GetId() []byte {
@@ -3921,7 +4433,7 @@ type SearchMemoriesRequest struct {
 
 func (x *SearchMemoriesRequest) Reset() {
 	*x = SearchMemoriesRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[50]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3933,7 +4445,7 @@ func (x *SearchMemoriesRequest) String() string {
 func (*SearchMemoriesRequest) ProtoMessage() {}
 
 func (x *SearchMemoriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[50]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3946,7 +4458,7 @@ func (x *SearchMemoriesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMemoriesRequest.ProtoReflect.Descriptor instead.
 func (*SearchMemoriesRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{50}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *SearchMemoriesRequest) GetNamespacePrefix() []string {
@@ -4007,7 +4519,7 @@ type SearchMemoriesResponse struct {
 
 func (x *SearchMemoriesResponse) Reset() {
 	*x = SearchMemoriesResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[51]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4019,7 +4531,7 @@ func (x *SearchMemoriesResponse) String() string {
 func (*SearchMemoriesResponse) ProtoMessage() {}
 
 func (x *SearchMemoriesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[51]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4032,7 +4544,7 @@ func (x *SearchMemoriesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMemoriesResponse.ProtoReflect.Descriptor instead.
 func (*SearchMemoriesResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{51}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *SearchMemoriesResponse) GetItems() []*MemoryItem {
@@ -4055,7 +4567,7 @@ type ListMemoryNamespacesRequest struct {
 
 func (x *ListMemoryNamespacesRequest) Reset() {
 	*x = ListMemoryNamespacesRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[52]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4067,7 +4579,7 @@ func (x *ListMemoryNamespacesRequest) String() string {
 func (*ListMemoryNamespacesRequest) ProtoMessage() {}
 
 func (x *ListMemoryNamespacesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[52]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4080,7 +4592,7 @@ func (x *ListMemoryNamespacesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoryNamespacesRequest.ProtoReflect.Descriptor instead.
 func (*ListMemoryNamespacesRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{52}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *ListMemoryNamespacesRequest) GetPrefix() []string {
@@ -4127,7 +4639,7 @@ type RequestActor struct {
 
 func (x *RequestActor) Reset() {
 	*x = RequestActor{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[53]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4139,7 +4651,7 @@ func (x *RequestActor) String() string {
 func (*RequestActor) ProtoMessage() {}
 
 func (x *RequestActor) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[53]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4152,7 +4664,7 @@ func (x *RequestActor) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestActor.ProtoReflect.Descriptor instead.
 func (*RequestActor) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{53}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *RequestActor) GetOnBehalfOfUserId() string {
@@ -4171,7 +4683,7 @@ type MemoryNamespace struct {
 
 func (x *MemoryNamespace) Reset() {
 	*x = MemoryNamespace{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[54]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4183,7 +4695,7 @@ func (x *MemoryNamespace) String() string {
 func (*MemoryNamespace) ProtoMessage() {}
 
 func (x *MemoryNamespace) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[54]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4196,7 +4708,7 @@ func (x *MemoryNamespace) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryNamespace.ProtoReflect.Descriptor instead.
 func (*MemoryNamespace) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{54}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *MemoryNamespace) GetSegments() []string {
@@ -4215,7 +4727,7 @@ type ListMemoryNamespacesResponse struct {
 
 func (x *ListMemoryNamespacesResponse) Reset() {
 	*x = ListMemoryNamespacesResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[55]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4227,7 +4739,7 @@ func (x *ListMemoryNamespacesResponse) String() string {
 func (*ListMemoryNamespacesResponse) ProtoMessage() {}
 
 func (x *ListMemoryNamespacesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[55]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4240,7 +4752,7 @@ func (x *ListMemoryNamespacesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMemoryNamespacesResponse.ProtoReflect.Descriptor instead.
 func (*ListMemoryNamespacesResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{55}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *ListMemoryNamespacesResponse) GetNamespaces() []*MemoryNamespace {
@@ -4259,7 +4771,7 @@ type MemoryIndexStatusResponse struct {
 
 func (x *MemoryIndexStatusResponse) Reset() {
 	*x = MemoryIndexStatusResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[56]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4271,7 +4783,7 @@ func (x *MemoryIndexStatusResponse) String() string {
 func (*MemoryIndexStatusResponse) ProtoMessage() {}
 
 func (x *MemoryIndexStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[56]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4284,7 +4796,7 @@ func (x *MemoryIndexStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryIndexStatusResponse.ProtoReflect.Descriptor instead.
 func (*MemoryIndexStatusResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{56}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *MemoryIndexStatusResponse) GetPending() int64 {
@@ -4304,7 +4816,7 @@ type MemoryUsage struct {
 
 func (x *MemoryUsage) Reset() {
 	*x = MemoryUsage{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[57]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4316,7 +4828,7 @@ func (x *MemoryUsage) String() string {
 func (*MemoryUsage) ProtoMessage() {}
 
 func (x *MemoryUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[57]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4329,7 +4841,7 @@ func (x *MemoryUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryUsage.ProtoReflect.Descriptor instead.
 func (*MemoryUsage) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{57}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *MemoryUsage) GetFetchCount() int64 {
@@ -4356,7 +4868,7 @@ type GetMemoryUsageRequest struct {
 
 func (x *GetMemoryUsageRequest) Reset() {
 	*x = GetMemoryUsageRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[58]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4368,7 +4880,7 @@ func (x *GetMemoryUsageRequest) String() string {
 func (*GetMemoryUsageRequest) ProtoMessage() {}
 
 func (x *GetMemoryUsageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[58]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4381,7 +4893,7 @@ func (x *GetMemoryUsageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMemoryUsageRequest.ProtoReflect.Descriptor instead.
 func (*GetMemoryUsageRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{58}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *GetMemoryUsageRequest) GetNamespace() []string {
@@ -4409,7 +4921,7 @@ type ListTopMemoryUsageRequest struct {
 
 func (x *ListTopMemoryUsageRequest) Reset() {
 	*x = ListTopMemoryUsageRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[59]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4421,7 +4933,7 @@ func (x *ListTopMemoryUsageRequest) String() string {
 func (*ListTopMemoryUsageRequest) ProtoMessage() {}
 
 func (x *ListTopMemoryUsageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[59]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4434,7 +4946,7 @@ func (x *ListTopMemoryUsageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTopMemoryUsageRequest.ProtoReflect.Descriptor instead.
 func (*ListTopMemoryUsageRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{59}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *ListTopMemoryUsageRequest) GetPrefix() []string {
@@ -4469,7 +4981,7 @@ type TopMemoryUsageItem struct {
 
 func (x *TopMemoryUsageItem) Reset() {
 	*x = TopMemoryUsageItem{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[60]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4481,7 +4993,7 @@ func (x *TopMemoryUsageItem) String() string {
 func (*TopMemoryUsageItem) ProtoMessage() {}
 
 func (x *TopMemoryUsageItem) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[60]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4494,7 +5006,7 @@ func (x *TopMemoryUsageItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopMemoryUsageItem.ProtoReflect.Descriptor instead.
 func (*TopMemoryUsageItem) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{60}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *TopMemoryUsageItem) GetNamespace() []string {
@@ -4527,7 +5039,7 @@ type ListTopMemoryUsageResponse struct {
 
 func (x *ListTopMemoryUsageResponse) Reset() {
 	*x = ListTopMemoryUsageResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[61]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4539,7 +5051,7 @@ func (x *ListTopMemoryUsageResponse) String() string {
 func (*ListTopMemoryUsageResponse) ProtoMessage() {}
 
 func (x *ListTopMemoryUsageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[61]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4552,7 +5064,7 @@ func (x *ListTopMemoryUsageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTopMemoryUsageResponse.ProtoReflect.Descriptor instead.
 func (*ListTopMemoryUsageResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{61}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *ListTopMemoryUsageResponse) GetItems() []*TopMemoryUsageItem {
@@ -4571,7 +5083,7 @@ type HealthResponse struct {
 
 func (x *HealthResponse) Reset() {
 	*x = HealthResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[62]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4583,7 +5095,7 @@ func (x *HealthResponse) String() string {
 func (*HealthResponse) ProtoMessage() {}
 
 func (x *HealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[62]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4596,7 +5108,7 @@ func (x *HealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthResponse.ProtoReflect.Descriptor instead.
 func (*HealthResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{62}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *HealthResponse) GetStatus() string {
@@ -4620,7 +5132,7 @@ type CapabilitiesTech struct {
 
 func (x *CapabilitiesTech) Reset() {
 	*x = CapabilitiesTech{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[63]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4632,7 +5144,7 @@ func (x *CapabilitiesTech) String() string {
 func (*CapabilitiesTech) ProtoMessage() {}
 
 func (x *CapabilitiesTech) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[63]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4645,7 +5157,7 @@ func (x *CapabilitiesTech) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilitiesTech.ProtoReflect.Descriptor instead.
 func (*CapabilitiesTech) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{63}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *CapabilitiesTech) GetStore() string {
@@ -4705,7 +5217,7 @@ type CapabilitiesFeatures struct {
 
 func (x *CapabilitiesFeatures) Reset() {
 	*x = CapabilitiesFeatures{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[64]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4717,7 +5229,7 @@ func (x *CapabilitiesFeatures) String() string {
 func (*CapabilitiesFeatures) ProtoMessage() {}
 
 func (x *CapabilitiesFeatures) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[64]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4730,7 +5242,7 @@ func (x *CapabilitiesFeatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilitiesFeatures.ProtoReflect.Descriptor instead.
 func (*CapabilitiesFeatures) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{64}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *CapabilitiesFeatures) GetOutboxEnabled() bool {
@@ -4793,7 +5305,7 @@ type CapabilitiesAuth struct {
 
 func (x *CapabilitiesAuth) Reset() {
 	*x = CapabilitiesAuth{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[65]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4805,7 +5317,7 @@ func (x *CapabilitiesAuth) String() string {
 func (*CapabilitiesAuth) ProtoMessage() {}
 
 func (x *CapabilitiesAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[65]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4818,7 +5330,7 @@ func (x *CapabilitiesAuth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilitiesAuth.ProtoReflect.Descriptor instead.
 func (*CapabilitiesAuth) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{65}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *CapabilitiesAuth) GetOidcEnabled() bool {
@@ -4853,7 +5365,7 @@ type CapabilitiesSecurity struct {
 
 func (x *CapabilitiesSecurity) Reset() {
 	*x = CapabilitiesSecurity{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[66]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4865,7 +5377,7 @@ func (x *CapabilitiesSecurity) String() string {
 func (*CapabilitiesSecurity) ProtoMessage() {}
 
 func (x *CapabilitiesSecurity) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[66]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4878,7 +5390,7 @@ func (x *CapabilitiesSecurity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilitiesSecurity.ProtoReflect.Descriptor instead.
 func (*CapabilitiesSecurity) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{66}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *CapabilitiesSecurity) GetEncryptionEnabled() bool {
@@ -4915,7 +5427,7 @@ type CapabilitiesResponse struct {
 
 func (x *CapabilitiesResponse) Reset() {
 	*x = CapabilitiesResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[67]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4927,7 +5439,7 @@ func (x *CapabilitiesResponse) String() string {
 func (*CapabilitiesResponse) ProtoMessage() {}
 
 func (x *CapabilitiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[67]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4940,7 +5452,7 @@ func (x *CapabilitiesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilitiesResponse.ProtoReflect.Descriptor instead.
 func (*CapabilitiesResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{67}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *CapabilitiesResponse) GetVersion() string {
@@ -4990,7 +5502,7 @@ type RecordRequest struct {
 
 func (x *RecordRequest) Reset() {
 	*x = RecordRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[68]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5002,7 +5514,7 @@ func (x *RecordRequest) String() string {
 func (*RecordRequest) ProtoMessage() {}
 
 func (x *RecordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[68]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5015,7 +5527,7 @@ func (x *RecordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordRequest.ProtoReflect.Descriptor instead.
 func (*RecordRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{68}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *RecordRequest) GetConversationId() []byte {
@@ -5049,7 +5561,7 @@ type RecordResponse struct {
 
 func (x *RecordResponse) Reset() {
 	*x = RecordResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[69]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5061,7 +5573,7 @@ func (x *RecordResponse) String() string {
 func (*RecordResponse) ProtoMessage() {}
 
 func (x *RecordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[69]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5074,7 +5586,7 @@ func (x *RecordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RecordResponse.ProtoReflect.Descriptor instead.
 func (*RecordResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{69}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *RecordResponse) GetStatus() RecordStatus {
@@ -5101,7 +5613,7 @@ type ReplayRequest struct {
 
 func (x *ReplayRequest) Reset() {
 	*x = ReplayRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[70]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5113,7 +5625,7 @@ func (x *ReplayRequest) String() string {
 func (*ReplayRequest) ProtoMessage() {}
 
 func (x *ReplayRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[70]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5126,7 +5638,7 @@ func (x *ReplayRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayRequest.ProtoReflect.Descriptor instead.
 func (*ReplayRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{70}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *ReplayRequest) GetConversationId() []byte {
@@ -5146,7 +5658,7 @@ type ReplayResponse struct {
 
 func (x *ReplayResponse) Reset() {
 	*x = ReplayResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[71]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5158,7 +5670,7 @@ func (x *ReplayResponse) String() string {
 func (*ReplayResponse) ProtoMessage() {}
 
 func (x *ReplayResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[71]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5171,7 +5683,7 @@ func (x *ReplayResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayResponse.ProtoReflect.Descriptor instead.
 func (*ReplayResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{71}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *ReplayResponse) GetContent() string {
@@ -5198,7 +5710,7 @@ type CancelRecordRequest struct {
 
 func (x *CancelRecordRequest) Reset() {
 	*x = CancelRecordRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[72]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5210,7 +5722,7 @@ func (x *CancelRecordRequest) String() string {
 func (*CancelRecordRequest) ProtoMessage() {}
 
 func (x *CancelRecordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[72]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5223,7 +5735,7 @@ func (x *CancelRecordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelRecordRequest.ProtoReflect.Descriptor instead.
 func (*CancelRecordRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{72}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *CancelRecordRequest) GetConversationId() []byte {
@@ -5243,7 +5755,7 @@ type CancelRecordResponse struct {
 
 func (x *CancelRecordResponse) Reset() {
 	*x = CancelRecordResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[73]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5255,7 +5767,7 @@ func (x *CancelRecordResponse) String() string {
 func (*CancelRecordResponse) ProtoMessage() {}
 
 func (x *CancelRecordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[73]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5268,7 +5780,7 @@ func (x *CancelRecordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelRecordResponse.ProtoReflect.Descriptor instead.
 func (*CancelRecordResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{73}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *CancelRecordResponse) GetAccepted() bool {
@@ -5294,7 +5806,7 @@ type IsEnabledResponse struct {
 
 func (x *IsEnabledResponse) Reset() {
 	*x = IsEnabledResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[74]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5306,7 +5818,7 @@ func (x *IsEnabledResponse) String() string {
 func (*IsEnabledResponse) ProtoMessage() {}
 
 func (x *IsEnabledResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[74]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5319,7 +5831,7 @@ func (x *IsEnabledResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IsEnabledResponse.ProtoReflect.Descriptor instead.
 func (*IsEnabledResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{74}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *IsEnabledResponse) GetEnabled() bool {
@@ -5339,7 +5851,7 @@ type CheckRecordingsRequest struct {
 
 func (x *CheckRecordingsRequest) Reset() {
 	*x = CheckRecordingsRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[75]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5351,7 +5863,7 @@ func (x *CheckRecordingsRequest) String() string {
 func (*CheckRecordingsRequest) ProtoMessage() {}
 
 func (x *CheckRecordingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[75]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5364,7 +5876,7 @@ func (x *CheckRecordingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckRecordingsRequest.ProtoReflect.Descriptor instead.
 func (*CheckRecordingsRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{75}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *CheckRecordingsRequest) GetConversationIds() [][]byte {
@@ -5384,7 +5896,7 @@ type CheckRecordingsResponse struct {
 
 func (x *CheckRecordingsResponse) Reset() {
 	*x = CheckRecordingsResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[76]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5396,7 +5908,7 @@ func (x *CheckRecordingsResponse) String() string {
 func (*CheckRecordingsResponse) ProtoMessage() {}
 
 func (x *CheckRecordingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[76]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5409,7 +5921,7 @@ func (x *CheckRecordingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckRecordingsResponse.ProtoReflect.Descriptor instead.
 func (*CheckRecordingsResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{76}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *CheckRecordingsResponse) GetConversationIds() [][]byte {
@@ -5432,7 +5944,7 @@ type UploadAttachmentRequest struct {
 
 func (x *UploadAttachmentRequest) Reset() {
 	*x = UploadAttachmentRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[77]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5444,7 +5956,7 @@ func (x *UploadAttachmentRequest) String() string {
 func (*UploadAttachmentRequest) ProtoMessage() {}
 
 func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[77]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5457,7 +5969,7 @@ func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachmentRequest.ProtoReflect.Descriptor instead.
 func (*UploadAttachmentRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{77}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *UploadAttachmentRequest) GetPayload() isUploadAttachmentRequest_Payload {
@@ -5515,7 +6027,7 @@ type UploadMetadata struct {
 
 func (x *UploadMetadata) Reset() {
 	*x = UploadMetadata{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[78]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5527,7 +6039,7 @@ func (x *UploadMetadata) String() string {
 func (*UploadMetadata) ProtoMessage() {}
 
 func (x *UploadMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[78]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5540,7 +6052,7 @@ func (x *UploadMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadMetadata.ProtoReflect.Descriptor instead.
 func (*UploadMetadata) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{78}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *UploadMetadata) GetFilename() string {
@@ -5579,7 +6091,7 @@ type UploadAttachmentResponse struct {
 
 func (x *UploadAttachmentResponse) Reset() {
 	*x = UploadAttachmentResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[79]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5591,7 +6103,7 @@ func (x *UploadAttachmentResponse) String() string {
 func (*UploadAttachmentResponse) ProtoMessage() {}
 
 func (x *UploadAttachmentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[79]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5604,7 +6116,7 @@ func (x *UploadAttachmentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachmentResponse.ProtoReflect.Descriptor instead.
 func (*UploadAttachmentResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{79}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *UploadAttachmentResponse) GetId() string {
@@ -5665,7 +6177,7 @@ type GetAttachmentRequest struct {
 
 func (x *GetAttachmentRequest) Reset() {
 	*x = GetAttachmentRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[80]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5677,7 +6189,7 @@ func (x *GetAttachmentRequest) String() string {
 func (*GetAttachmentRequest) ProtoMessage() {}
 
 func (x *GetAttachmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[80]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5690,7 +6202,7 @@ func (x *GetAttachmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAttachmentRequest.ProtoReflect.Descriptor instead.
 func (*GetAttachmentRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{80}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *GetAttachmentRequest) GetId() string {
@@ -5716,7 +6228,7 @@ type AttachmentInfo struct {
 
 func (x *AttachmentInfo) Reset() {
 	*x = AttachmentInfo{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[81]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5728,7 +6240,7 @@ func (x *AttachmentInfo) String() string {
 func (*AttachmentInfo) ProtoMessage() {}
 
 func (x *AttachmentInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[81]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5741,7 +6253,7 @@ func (x *AttachmentInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentInfo.ProtoReflect.Descriptor instead.
 func (*AttachmentInfo) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{81}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *AttachmentInfo) GetId() string {
@@ -5809,7 +6321,7 @@ type DownloadAttachmentRequest struct {
 
 func (x *DownloadAttachmentRequest) Reset() {
 	*x = DownloadAttachmentRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[82]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5821,7 +6333,7 @@ func (x *DownloadAttachmentRequest) String() string {
 func (*DownloadAttachmentRequest) ProtoMessage() {}
 
 func (x *DownloadAttachmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[82]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5834,7 +6346,7 @@ func (x *DownloadAttachmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadAttachmentRequest.ProtoReflect.Descriptor instead.
 func (*DownloadAttachmentRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{82}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *DownloadAttachmentRequest) GetId() string {
@@ -5857,7 +6369,7 @@ type DownloadAttachmentResponse struct {
 
 func (x *DownloadAttachmentResponse) Reset() {
 	*x = DownloadAttachmentResponse{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[83]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5869,7 +6381,7 @@ func (x *DownloadAttachmentResponse) String() string {
 func (*DownloadAttachmentResponse) ProtoMessage() {}
 
 func (x *DownloadAttachmentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[83]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5882,7 +6394,7 @@ func (x *DownloadAttachmentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadAttachmentResponse.ProtoReflect.Descriptor instead.
 func (*DownloadAttachmentResponse) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{83}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *DownloadAttachmentResponse) GetPayload() isDownloadAttachmentResponse_Payload {
@@ -5937,7 +6449,7 @@ type GetCheckpointRequest struct {
 
 func (x *GetCheckpointRequest) Reset() {
 	*x = GetCheckpointRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[84]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5949,7 +6461,7 @@ func (x *GetCheckpointRequest) String() string {
 func (*GetCheckpointRequest) ProtoMessage() {}
 
 func (x *GetCheckpointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[84]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5962,7 +6474,7 @@ func (x *GetCheckpointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCheckpointRequest.ProtoReflect.Descriptor instead.
 func (*GetCheckpointRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{84}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *GetCheckpointRequest) GetClientId() string {
@@ -5983,7 +6495,7 @@ type PutCheckpointRequest struct {
 
 func (x *PutCheckpointRequest) Reset() {
 	*x = PutCheckpointRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[85]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5995,7 +6507,7 @@ func (x *PutCheckpointRequest) String() string {
 func (*PutCheckpointRequest) ProtoMessage() {}
 
 func (x *PutCheckpointRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[85]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6008,7 +6520,7 @@ func (x *PutCheckpointRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PutCheckpointRequest.ProtoReflect.Descriptor instead.
 func (*PutCheckpointRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{85}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *PutCheckpointRequest) GetClientId() string {
@@ -6044,7 +6556,7 @@ type AdminCheckpoint struct {
 
 func (x *AdminCheckpoint) Reset() {
 	*x = AdminCheckpoint{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[86]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6056,7 +6568,7 @@ func (x *AdminCheckpoint) String() string {
 func (*AdminCheckpoint) ProtoMessage() {}
 
 func (x *AdminCheckpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[86]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6069,7 +6581,7 @@ func (x *AdminCheckpoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdminCheckpoint.ProtoReflect.Descriptor instead.
 func (*AdminCheckpoint) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{86}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *AdminCheckpoint) GetClientId() string {
@@ -6126,7 +6638,7 @@ type SubscribeEventsRequest struct {
 
 func (x *SubscribeEventsRequest) Reset() {
 	*x = SubscribeEventsRequest{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[87]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6138,7 +6650,7 @@ func (x *SubscribeEventsRequest) String() string {
 func (*SubscribeEventsRequest) ProtoMessage() {}
 
 func (x *SubscribeEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[87]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6151,7 +6663,7 @@ func (x *SubscribeEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscribeEventsRequest.ProtoReflect.Descriptor instead.
 func (*SubscribeEventsRequest) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{87}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *SubscribeEventsRequest) GetConversationIds() [][]byte {
@@ -6233,7 +6745,7 @@ type EventNotification struct {
 
 func (x *EventNotification) Reset() {
 	*x = EventNotification{}
-	mi := &file_memory_v1_memory_service_proto_msgTypes[88]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6245,7 +6757,7 @@ func (x *EventNotification) String() string {
 func (*EventNotification) ProtoMessage() {}
 
 func (x *EventNotification) ProtoReflect() protoreflect.Message {
-	mi := &file_memory_v1_memory_service_proto_msgTypes[88]
+	mi := &file_memory_v1_memory_service_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6258,7 +6770,7 @@ func (x *EventNotification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EventNotification.ProtoReflect.Descriptor instead.
 func (*EventNotification) Descriptor() ([]byte, []int) {
-	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{88}
+	return file_memory_v1_memory_service_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *EventNotification) GetEvent() string {
@@ -6439,7 +6951,46 @@ const file_memory_v1_memory_service_proto_rawDesc = "" +
 	"\x04page\x18\x04 \x01(\v2\x16.memory.v1.PageRequestR\x04page\x12\x14\n" +
 	"\x05forks\x18\x05 \x01(\tR\x05forks\x12(\n" +
 	"\x0eup_to_entry_id\x18\x06 \x01(\fH\x00R\vupToEntryId\x88\x01\x01B\x11\n" +
-	"\x0f_up_to_entry_id\"\x91\x02\n" +
+	"\x0f_up_to_entry_id\"F\n" +
+	"\x1bAdminGetConversationRequest\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\fR\x0econversationId\"\xc3\x03\n" +
+	"\x1dAdminListConversationsRequest\x12*\n" +
+	"\x04page\x18\x01 \x01(\v2\x16.memory.v1.PageRequestR\x04page\x12'\n" +
+	"\rowner_user_id\x18\x02 \x01(\tH\x00R\vownerUserId\x88\x01\x01\x12 \n" +
+	"\tclient_id\x18\x03 \x01(\tH\x01R\bclientId\x88\x01\x01\x12\x1e\n" +
+	"\bagent_id\x18\x04 \x01(\tH\x02R\aagentId\x88\x01\x01\x129\n" +
+	"\barchived\x18\x05 \x01(\x0e2\x18.memory.v1.ArchiveFilterH\x03R\barchived\x88\x01\x01\x128\n" +
+	"\x04mode\x18\x06 \x01(\x0e2\x1f.memory.v1.ConversationListModeH\x04R\x04mode\x88\x01\x01\x12F\n" +
+	"\bancestry\x18\a \x01(\x0e2%.memory.v1.ConversationAncestryFilterH\x05R\bancestry\x88\x01\x01B\x10\n" +
+	"\x0e_owner_user_idB\f\n" +
+	"\n" +
+	"_client_idB\v\n" +
+	"\t_agent_idB\v\n" +
+	"\t_archivedB\a\n" +
+	"\x05_modeB\v\n" +
+	"\t_ancestry\"\x98\x01\n" +
+	"\x1eAdminListConversationsResponse\x12D\n" +
+	"\rconversations\x18\x01 \x03(\v2\x1e.memory.v1.ConversationSummaryR\rconversations\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.memory.v1.PageInfoR\bpageInfo\"w\n" +
+	"\x1eAdminUpdateConversationRequest\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\fR\x0econversationId\x12\x1f\n" +
+	"\barchived\x18\x02 \x01(\bH\x00R\barchived\x88\x01\x01B\v\n" +
+	"\t_archived\"r\n" +
+	"\x1bAdminListMembershipsRequest\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\fR\x0econversationId\x12*\n" +
+	"\x04page\x18\x02 \x01(\v2\x16.memory.v1.PageRequestR\x04page\"l\n" +
+	"\x15AdminListForksRequest\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\fR\x0econversationId\x12*\n" +
+	"\x04page\x18\x02 \x01(\v2\x16.memory.v1.PageRequestR\x04page\"\x84\x01\n" +
+	"\x16AdminListForksResponse\x128\n" +
+	"\x05forks\x18\x01 \x03(\v2\".memory.v1.ConversationForkSummaryR\x05forks\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.memory.v1.PageInfoR\bpageInfo\"y\n" +
+	"\"AdminListChildConversationsRequest\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\fR\x0econversationId\x12*\n" +
+	"\x04page\x18\x02 \x01(\v2\x16.memory.v1.PageRequestR\x04page\"\x98\x01\n" +
+	"#AdminListChildConversationsResponse\x12?\n" +
+	"\bchildren\x18\x01 \x03(\v2#.memory.v1.ChildConversationSummaryR\bchildren\x120\n" +
+	"\tpage_info\x18\x02 \x01(\v2\x13.memory.v1.PageInfoR\bpageInfo\"\x91\x02\n" +
 	"\x05Entry\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\fR\x02id\x12'\n" +
 	"\x0fconversation_id\x18\x02 \x01(\fR\x0econversationId\x12\x17\n" +
@@ -6843,7 +7394,14 @@ const file_memory_v1_memory_service_proto_rawDesc = "" +
 	"\vAppendEntry\x12\x1d.memory.v1.AppendEntryRequest\x1a\x10.memory.v1.Entry\x12L\n" +
 	"\vSyncEntries\x12\x1d.memory.v1.SyncEntriesRequest\x1a\x1e.memory.v1.SyncEntriesResponse2h\n" +
 	"\x13AdminEntriesService\x12Q\n" +
-	"\vListEntries\x12\".memory.v1.AdminListEntriesRequest\x1a\x1e.memory.v1.ListEntriesResponse2\xb5\x02\n" +
+	"\vListEntries\x12\".memory.v1.AdminListEntriesRequest\x1a\x1e.memory.v1.ListEntriesResponse2\xdd\x04\n" +
+	"\x19AdminConversationsService\x12R\n" +
+	"\x0fGetConversation\x12&.memory.v1.AdminGetConversationRequest\x1a\x17.memory.v1.Conversation\x12h\n" +
+	"\x11ListConversations\x12(.memory.v1.AdminListConversationsRequest\x1a).memory.v1.AdminListConversationsResponse\x12X\n" +
+	"\x12UpdateConversation\x12).memory.v1.AdminUpdateConversationRequest\x1a\x17.memory.v1.Conversation\x12]\n" +
+	"\x0fListMemberships\x12&.memory.v1.AdminListMembershipsRequest\x1a\".memory.v1.ListMembershipsResponse\x12P\n" +
+	"\tListForks\x12 .memory.v1.AdminListForksRequest\x1a!.memory.v1.AdminListForksResponse\x12w\n" +
+	"\x16ListChildConversations\x12-.memory.v1.AdminListChildConversationsRequest\x1a..memory.v1.AdminListChildConversationsResponse2\xb5\x02\n" +
 	"\rSearchService\x12X\n" +
 	"\x13SearchConversations\x12\x1f.memory.v1.SearchEntriesRequest\x1a .memory.v1.SearchEntriesResponse\x12a\n" +
 	"\x12IndexConversations\x12$.memory.v1.IndexConversationsRequest\x1a%.memory.v1.IndexConversationsResponse\x12g\n" +
@@ -6887,118 +7445,127 @@ func file_memory_v1_memory_service_proto_rawDescGZIP() []byte {
 }
 
 var file_memory_v1_memory_service_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_memory_v1_memory_service_proto_msgTypes = make([]protoimpl.MessageInfo, 90)
+var file_memory_v1_memory_service_proto_msgTypes = make([]protoimpl.MessageInfo, 99)
 var file_memory_v1_memory_service_proto_goTypes = []any{
-	(ConversationListMode)(0),              // 0: memory.v1.ConversationListMode
-	(ConversationAncestryFilter)(0),        // 1: memory.v1.ConversationAncestryFilter
-	(ArchiveFilter)(0),                     // 2: memory.v1.ArchiveFilter
-	(EventScope)(0),                        // 3: memory.v1.EventScope
-	(AccessLevel)(0),                       // 4: memory.v1.AccessLevel
-	(Channel)(0),                           // 5: memory.v1.Channel
-	(TransferRole)(0),                      // 6: memory.v1.TransferRole
-	(MemoryUsageSort)(0),                   // 7: memory.v1.MemoryUsageSort
-	(RecordStatus)(0),                      // 8: memory.v1.RecordStatus
-	(*PageRequest)(nil),                    // 9: memory.v1.PageRequest
-	(*PageInfo)(nil),                       // 10: memory.v1.PageInfo
-	(*ConversationSummary)(nil),            // 11: memory.v1.ConversationSummary
-	(*ChildConversationSummary)(nil),       // 12: memory.v1.ChildConversationSummary
-	(*Conversation)(nil),                   // 13: memory.v1.Conversation
-	(*ConversationMembership)(nil),         // 14: memory.v1.ConversationMembership
-	(*ConversationForkSummary)(nil),        // 15: memory.v1.ConversationForkSummary
-	(*CreateConversationRequest)(nil),      // 16: memory.v1.CreateConversationRequest
-	(*ListConversationsRequest)(nil),       // 17: memory.v1.ListConversationsRequest
-	(*ListConversationsResponse)(nil),      // 18: memory.v1.ListConversationsResponse
-	(*GetConversationRequest)(nil),         // 19: memory.v1.GetConversationRequest
-	(*UpdateConversationRequest)(nil),      // 20: memory.v1.UpdateConversationRequest
-	(*ListForksRequest)(nil),               // 21: memory.v1.ListForksRequest
-	(*ListForksResponse)(nil),              // 22: memory.v1.ListForksResponse
-	(*ListChildConversationsRequest)(nil),  // 23: memory.v1.ListChildConversationsRequest
-	(*ListChildConversationsResponse)(nil), // 24: memory.v1.ListChildConversationsResponse
-	(*CreateEntryRequest)(nil),             // 25: memory.v1.CreateEntryRequest
-	(*SyncEntriesRequest)(nil),             // 26: memory.v1.SyncEntriesRequest
-	(*SyncEntriesResponse)(nil),            // 27: memory.v1.SyncEntriesResponse
-	(*AppendEntryRequest)(nil),             // 28: memory.v1.AppendEntryRequest
-	(*ListEntriesRequest)(nil),             // 29: memory.v1.ListEntriesRequest
-	(*ListEntriesResponse)(nil),            // 30: memory.v1.ListEntriesResponse
-	(*AdminListEntriesRequest)(nil),        // 31: memory.v1.AdminListEntriesRequest
-	(*Entry)(nil),                          // 32: memory.v1.Entry
-	(*ListMembershipsRequest)(nil),         // 33: memory.v1.ListMembershipsRequest
-	(*ListMembershipsResponse)(nil),        // 34: memory.v1.ListMembershipsResponse
-	(*ShareConversationRequest)(nil),       // 35: memory.v1.ShareConversationRequest
-	(*UpdateMembershipRequest)(nil),        // 36: memory.v1.UpdateMembershipRequest
-	(*DeleteMembershipRequest)(nil),        // 37: memory.v1.DeleteMembershipRequest
-	(*OwnershipTransfer)(nil),              // 38: memory.v1.OwnershipTransfer
-	(*ListOwnershipTransfersRequest)(nil),  // 39: memory.v1.ListOwnershipTransfersRequest
-	(*ListOwnershipTransfersResponse)(nil), // 40: memory.v1.ListOwnershipTransfersResponse
-	(*GetOwnershipTransferRequest)(nil),    // 41: memory.v1.GetOwnershipTransferRequest
-	(*CreateOwnershipTransferRequest)(nil), // 42: memory.v1.CreateOwnershipTransferRequest
-	(*AcceptOwnershipTransferRequest)(nil), // 43: memory.v1.AcceptOwnershipTransferRequest
-	(*DeleteOwnershipTransferRequest)(nil), // 44: memory.v1.DeleteOwnershipTransferRequest
-	(*SearchEntriesRequest)(nil),           // 45: memory.v1.SearchEntriesRequest
-	(*SearchEntriesResponse)(nil),          // 46: memory.v1.SearchEntriesResponse
-	(*SearchResult)(nil),                   // 47: memory.v1.SearchResult
-	(*IndexConversationsRequest)(nil),      // 48: memory.v1.IndexConversationsRequest
-	(*IndexEntryRequest)(nil),              // 49: memory.v1.IndexEntryRequest
-	(*IndexConversationsResponse)(nil),     // 50: memory.v1.IndexConversationsResponse
-	(*ListUnindexedEntriesRequest)(nil),    // 51: memory.v1.ListUnindexedEntriesRequest
-	(*ListUnindexedEntriesResponse)(nil),   // 52: memory.v1.ListUnindexedEntriesResponse
-	(*UnindexedEntry)(nil),                 // 53: memory.v1.UnindexedEntry
-	(*PutMemoryRequest)(nil),               // 54: memory.v1.PutMemoryRequest
-	(*MemoryWriteResult)(nil),              // 55: memory.v1.MemoryWriteResult
-	(*GetMemoryRequest)(nil),               // 56: memory.v1.GetMemoryRequest
-	(*UpdateMemoryRequest)(nil),            // 57: memory.v1.UpdateMemoryRequest
-	(*MemoryItem)(nil),                     // 58: memory.v1.MemoryItem
-	(*SearchMemoriesRequest)(nil),          // 59: memory.v1.SearchMemoriesRequest
-	(*SearchMemoriesResponse)(nil),         // 60: memory.v1.SearchMemoriesResponse
-	(*ListMemoryNamespacesRequest)(nil),    // 61: memory.v1.ListMemoryNamespacesRequest
-	(*RequestActor)(nil),                   // 62: memory.v1.RequestActor
-	(*MemoryNamespace)(nil),                // 63: memory.v1.MemoryNamespace
-	(*ListMemoryNamespacesResponse)(nil),   // 64: memory.v1.ListMemoryNamespacesResponse
-	(*MemoryIndexStatusResponse)(nil),      // 65: memory.v1.MemoryIndexStatusResponse
-	(*MemoryUsage)(nil),                    // 66: memory.v1.MemoryUsage
-	(*GetMemoryUsageRequest)(nil),          // 67: memory.v1.GetMemoryUsageRequest
-	(*ListTopMemoryUsageRequest)(nil),      // 68: memory.v1.ListTopMemoryUsageRequest
-	(*TopMemoryUsageItem)(nil),             // 69: memory.v1.TopMemoryUsageItem
-	(*ListTopMemoryUsageResponse)(nil),     // 70: memory.v1.ListTopMemoryUsageResponse
-	(*HealthResponse)(nil),                 // 71: memory.v1.HealthResponse
-	(*CapabilitiesTech)(nil),               // 72: memory.v1.CapabilitiesTech
-	(*CapabilitiesFeatures)(nil),           // 73: memory.v1.CapabilitiesFeatures
-	(*CapabilitiesAuth)(nil),               // 74: memory.v1.CapabilitiesAuth
-	(*CapabilitiesSecurity)(nil),           // 75: memory.v1.CapabilitiesSecurity
-	(*CapabilitiesResponse)(nil),           // 76: memory.v1.CapabilitiesResponse
-	(*RecordRequest)(nil),                  // 77: memory.v1.RecordRequest
-	(*RecordResponse)(nil),                 // 78: memory.v1.RecordResponse
-	(*ReplayRequest)(nil),                  // 79: memory.v1.ReplayRequest
-	(*ReplayResponse)(nil),                 // 80: memory.v1.ReplayResponse
-	(*CancelRecordRequest)(nil),            // 81: memory.v1.CancelRecordRequest
-	(*CancelRecordResponse)(nil),           // 82: memory.v1.CancelRecordResponse
-	(*IsEnabledResponse)(nil),              // 83: memory.v1.IsEnabledResponse
-	(*CheckRecordingsRequest)(nil),         // 84: memory.v1.CheckRecordingsRequest
-	(*CheckRecordingsResponse)(nil),        // 85: memory.v1.CheckRecordingsResponse
-	(*UploadAttachmentRequest)(nil),        // 86: memory.v1.UploadAttachmentRequest
-	(*UploadMetadata)(nil),                 // 87: memory.v1.UploadMetadata
-	(*UploadAttachmentResponse)(nil),       // 88: memory.v1.UploadAttachmentResponse
-	(*GetAttachmentRequest)(nil),           // 89: memory.v1.GetAttachmentRequest
-	(*AttachmentInfo)(nil),                 // 90: memory.v1.AttachmentInfo
-	(*DownloadAttachmentRequest)(nil),      // 91: memory.v1.DownloadAttachmentRequest
-	(*DownloadAttachmentResponse)(nil),     // 92: memory.v1.DownloadAttachmentResponse
-	(*GetCheckpointRequest)(nil),           // 93: memory.v1.GetCheckpointRequest
-	(*PutCheckpointRequest)(nil),           // 94: memory.v1.PutCheckpointRequest
-	(*AdminCheckpoint)(nil),                // 95: memory.v1.AdminCheckpoint
-	(*SubscribeEventsRequest)(nil),         // 96: memory.v1.SubscribeEventsRequest
-	(*EventNotification)(nil),              // 97: memory.v1.EventNotification
-	nil,                                    // 98: memory.v1.PutMemoryRequest.IndexEntry
-	(*structpb.Struct)(nil),                // 99: google.protobuf.Struct
-	(*structpb.Value)(nil),                 // 100: google.protobuf.Value
-	(*timestamppb.Timestamp)(nil),          // 101: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                  // 102: google.protobuf.Empty
+	(ConversationListMode)(0),                   // 0: memory.v1.ConversationListMode
+	(ConversationAncestryFilter)(0),             // 1: memory.v1.ConversationAncestryFilter
+	(ArchiveFilter)(0),                          // 2: memory.v1.ArchiveFilter
+	(EventScope)(0),                             // 3: memory.v1.EventScope
+	(AccessLevel)(0),                            // 4: memory.v1.AccessLevel
+	(Channel)(0),                                // 5: memory.v1.Channel
+	(TransferRole)(0),                           // 6: memory.v1.TransferRole
+	(MemoryUsageSort)(0),                        // 7: memory.v1.MemoryUsageSort
+	(RecordStatus)(0),                           // 8: memory.v1.RecordStatus
+	(*PageRequest)(nil),                         // 9: memory.v1.PageRequest
+	(*PageInfo)(nil),                            // 10: memory.v1.PageInfo
+	(*ConversationSummary)(nil),                 // 11: memory.v1.ConversationSummary
+	(*ChildConversationSummary)(nil),            // 12: memory.v1.ChildConversationSummary
+	(*Conversation)(nil),                        // 13: memory.v1.Conversation
+	(*ConversationMembership)(nil),              // 14: memory.v1.ConversationMembership
+	(*ConversationForkSummary)(nil),             // 15: memory.v1.ConversationForkSummary
+	(*CreateConversationRequest)(nil),           // 16: memory.v1.CreateConversationRequest
+	(*ListConversationsRequest)(nil),            // 17: memory.v1.ListConversationsRequest
+	(*ListConversationsResponse)(nil),           // 18: memory.v1.ListConversationsResponse
+	(*GetConversationRequest)(nil),              // 19: memory.v1.GetConversationRequest
+	(*UpdateConversationRequest)(nil),           // 20: memory.v1.UpdateConversationRequest
+	(*ListForksRequest)(nil),                    // 21: memory.v1.ListForksRequest
+	(*ListForksResponse)(nil),                   // 22: memory.v1.ListForksResponse
+	(*ListChildConversationsRequest)(nil),       // 23: memory.v1.ListChildConversationsRequest
+	(*ListChildConversationsResponse)(nil),      // 24: memory.v1.ListChildConversationsResponse
+	(*CreateEntryRequest)(nil),                  // 25: memory.v1.CreateEntryRequest
+	(*SyncEntriesRequest)(nil),                  // 26: memory.v1.SyncEntriesRequest
+	(*SyncEntriesResponse)(nil),                 // 27: memory.v1.SyncEntriesResponse
+	(*AppendEntryRequest)(nil),                  // 28: memory.v1.AppendEntryRequest
+	(*ListEntriesRequest)(nil),                  // 29: memory.v1.ListEntriesRequest
+	(*ListEntriesResponse)(nil),                 // 30: memory.v1.ListEntriesResponse
+	(*AdminListEntriesRequest)(nil),             // 31: memory.v1.AdminListEntriesRequest
+	(*AdminGetConversationRequest)(nil),         // 32: memory.v1.AdminGetConversationRequest
+	(*AdminListConversationsRequest)(nil),       // 33: memory.v1.AdminListConversationsRequest
+	(*AdminListConversationsResponse)(nil),      // 34: memory.v1.AdminListConversationsResponse
+	(*AdminUpdateConversationRequest)(nil),      // 35: memory.v1.AdminUpdateConversationRequest
+	(*AdminListMembershipsRequest)(nil),         // 36: memory.v1.AdminListMembershipsRequest
+	(*AdminListForksRequest)(nil),               // 37: memory.v1.AdminListForksRequest
+	(*AdminListForksResponse)(nil),              // 38: memory.v1.AdminListForksResponse
+	(*AdminListChildConversationsRequest)(nil),  // 39: memory.v1.AdminListChildConversationsRequest
+	(*AdminListChildConversationsResponse)(nil), // 40: memory.v1.AdminListChildConversationsResponse
+	(*Entry)(nil),                               // 41: memory.v1.Entry
+	(*ListMembershipsRequest)(nil),              // 42: memory.v1.ListMembershipsRequest
+	(*ListMembershipsResponse)(nil),             // 43: memory.v1.ListMembershipsResponse
+	(*ShareConversationRequest)(nil),            // 44: memory.v1.ShareConversationRequest
+	(*UpdateMembershipRequest)(nil),             // 45: memory.v1.UpdateMembershipRequest
+	(*DeleteMembershipRequest)(nil),             // 46: memory.v1.DeleteMembershipRequest
+	(*OwnershipTransfer)(nil),                   // 47: memory.v1.OwnershipTransfer
+	(*ListOwnershipTransfersRequest)(nil),       // 48: memory.v1.ListOwnershipTransfersRequest
+	(*ListOwnershipTransfersResponse)(nil),      // 49: memory.v1.ListOwnershipTransfersResponse
+	(*GetOwnershipTransferRequest)(nil),         // 50: memory.v1.GetOwnershipTransferRequest
+	(*CreateOwnershipTransferRequest)(nil),      // 51: memory.v1.CreateOwnershipTransferRequest
+	(*AcceptOwnershipTransferRequest)(nil),      // 52: memory.v1.AcceptOwnershipTransferRequest
+	(*DeleteOwnershipTransferRequest)(nil),      // 53: memory.v1.DeleteOwnershipTransferRequest
+	(*SearchEntriesRequest)(nil),                // 54: memory.v1.SearchEntriesRequest
+	(*SearchEntriesResponse)(nil),               // 55: memory.v1.SearchEntriesResponse
+	(*SearchResult)(nil),                        // 56: memory.v1.SearchResult
+	(*IndexConversationsRequest)(nil),           // 57: memory.v1.IndexConversationsRequest
+	(*IndexEntryRequest)(nil),                   // 58: memory.v1.IndexEntryRequest
+	(*IndexConversationsResponse)(nil),          // 59: memory.v1.IndexConversationsResponse
+	(*ListUnindexedEntriesRequest)(nil),         // 60: memory.v1.ListUnindexedEntriesRequest
+	(*ListUnindexedEntriesResponse)(nil),        // 61: memory.v1.ListUnindexedEntriesResponse
+	(*UnindexedEntry)(nil),                      // 62: memory.v1.UnindexedEntry
+	(*PutMemoryRequest)(nil),                    // 63: memory.v1.PutMemoryRequest
+	(*MemoryWriteResult)(nil),                   // 64: memory.v1.MemoryWriteResult
+	(*GetMemoryRequest)(nil),                    // 65: memory.v1.GetMemoryRequest
+	(*UpdateMemoryRequest)(nil),                 // 66: memory.v1.UpdateMemoryRequest
+	(*MemoryItem)(nil),                          // 67: memory.v1.MemoryItem
+	(*SearchMemoriesRequest)(nil),               // 68: memory.v1.SearchMemoriesRequest
+	(*SearchMemoriesResponse)(nil),              // 69: memory.v1.SearchMemoriesResponse
+	(*ListMemoryNamespacesRequest)(nil),         // 70: memory.v1.ListMemoryNamespacesRequest
+	(*RequestActor)(nil),                        // 71: memory.v1.RequestActor
+	(*MemoryNamespace)(nil),                     // 72: memory.v1.MemoryNamespace
+	(*ListMemoryNamespacesResponse)(nil),        // 73: memory.v1.ListMemoryNamespacesResponse
+	(*MemoryIndexStatusResponse)(nil),           // 74: memory.v1.MemoryIndexStatusResponse
+	(*MemoryUsage)(nil),                         // 75: memory.v1.MemoryUsage
+	(*GetMemoryUsageRequest)(nil),               // 76: memory.v1.GetMemoryUsageRequest
+	(*ListTopMemoryUsageRequest)(nil),           // 77: memory.v1.ListTopMemoryUsageRequest
+	(*TopMemoryUsageItem)(nil),                  // 78: memory.v1.TopMemoryUsageItem
+	(*ListTopMemoryUsageResponse)(nil),          // 79: memory.v1.ListTopMemoryUsageResponse
+	(*HealthResponse)(nil),                      // 80: memory.v1.HealthResponse
+	(*CapabilitiesTech)(nil),                    // 81: memory.v1.CapabilitiesTech
+	(*CapabilitiesFeatures)(nil),                // 82: memory.v1.CapabilitiesFeatures
+	(*CapabilitiesAuth)(nil),                    // 83: memory.v1.CapabilitiesAuth
+	(*CapabilitiesSecurity)(nil),                // 84: memory.v1.CapabilitiesSecurity
+	(*CapabilitiesResponse)(nil),                // 85: memory.v1.CapabilitiesResponse
+	(*RecordRequest)(nil),                       // 86: memory.v1.RecordRequest
+	(*RecordResponse)(nil),                      // 87: memory.v1.RecordResponse
+	(*ReplayRequest)(nil),                       // 88: memory.v1.ReplayRequest
+	(*ReplayResponse)(nil),                      // 89: memory.v1.ReplayResponse
+	(*CancelRecordRequest)(nil),                 // 90: memory.v1.CancelRecordRequest
+	(*CancelRecordResponse)(nil),                // 91: memory.v1.CancelRecordResponse
+	(*IsEnabledResponse)(nil),                   // 92: memory.v1.IsEnabledResponse
+	(*CheckRecordingsRequest)(nil),              // 93: memory.v1.CheckRecordingsRequest
+	(*CheckRecordingsResponse)(nil),             // 94: memory.v1.CheckRecordingsResponse
+	(*UploadAttachmentRequest)(nil),             // 95: memory.v1.UploadAttachmentRequest
+	(*UploadMetadata)(nil),                      // 96: memory.v1.UploadMetadata
+	(*UploadAttachmentResponse)(nil),            // 97: memory.v1.UploadAttachmentResponse
+	(*GetAttachmentRequest)(nil),                // 98: memory.v1.GetAttachmentRequest
+	(*AttachmentInfo)(nil),                      // 99: memory.v1.AttachmentInfo
+	(*DownloadAttachmentRequest)(nil),           // 100: memory.v1.DownloadAttachmentRequest
+	(*DownloadAttachmentResponse)(nil),          // 101: memory.v1.DownloadAttachmentResponse
+	(*GetCheckpointRequest)(nil),                // 102: memory.v1.GetCheckpointRequest
+	(*PutCheckpointRequest)(nil),                // 103: memory.v1.PutCheckpointRequest
+	(*AdminCheckpoint)(nil),                     // 104: memory.v1.AdminCheckpoint
+	(*SubscribeEventsRequest)(nil),              // 105: memory.v1.SubscribeEventsRequest
+	(*EventNotification)(nil),                   // 106: memory.v1.EventNotification
+	nil,                                         // 107: memory.v1.PutMemoryRequest.IndexEntry
+	(*structpb.Struct)(nil),                     // 108: google.protobuf.Struct
+	(*structpb.Value)(nil),                      // 109: google.protobuf.Value
+	(*timestamppb.Timestamp)(nil),               // 110: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                       // 111: google.protobuf.Empty
 }
 var file_memory_v1_memory_service_proto_depIdxs = []int32{
 	4,   // 0: memory.v1.ConversationSummary.access_level:type_name -> memory.v1.AccessLevel
 	4,   // 1: memory.v1.ChildConversationSummary.access_level:type_name -> memory.v1.AccessLevel
 	4,   // 2: memory.v1.Conversation.access_level:type_name -> memory.v1.AccessLevel
 	4,   // 3: memory.v1.ConversationMembership.access_level:type_name -> memory.v1.AccessLevel
-	99,  // 4: memory.v1.CreateConversationRequest.metadata:type_name -> google.protobuf.Struct
+	108, // 4: memory.v1.CreateConversationRequest.metadata:type_name -> google.protobuf.Struct
 	0,   // 5: memory.v1.ListConversationsRequest.mode:type_name -> memory.v1.ConversationListMode
 	9,   // 6: memory.v1.ListConversationsRequest.page:type_name -> memory.v1.PageRequest
 	1,   // 7: memory.v1.ListConversationsRequest.ancestry:type_name -> memory.v1.ConversationAncestryFilter
@@ -7012,155 +7579,180 @@ var file_memory_v1_memory_service_proto_depIdxs = []int32{
 	12,  // 15: memory.v1.ListChildConversationsResponse.conversations:type_name -> memory.v1.ChildConversationSummary
 	10,  // 16: memory.v1.ListChildConversationsResponse.page_info:type_name -> memory.v1.PageInfo
 	5,   // 17: memory.v1.CreateEntryRequest.channel:type_name -> memory.v1.Channel
-	100, // 18: memory.v1.CreateEntryRequest.content:type_name -> google.protobuf.Value
+	109, // 18: memory.v1.CreateEntryRequest.content:type_name -> google.protobuf.Value
 	25,  // 19: memory.v1.SyncEntriesRequest.entry:type_name -> memory.v1.CreateEntryRequest
-	32,  // 20: memory.v1.SyncEntriesResponse.entry:type_name -> memory.v1.Entry
+	41,  // 20: memory.v1.SyncEntriesResponse.entry:type_name -> memory.v1.Entry
 	25,  // 21: memory.v1.AppendEntryRequest.entry:type_name -> memory.v1.CreateEntryRequest
 	5,   // 22: memory.v1.ListEntriesRequest.channel:type_name -> memory.v1.Channel
 	9,   // 23: memory.v1.ListEntriesRequest.page:type_name -> memory.v1.PageRequest
-	32,  // 24: memory.v1.ListEntriesResponse.entries:type_name -> memory.v1.Entry
+	41,  // 24: memory.v1.ListEntriesResponse.entries:type_name -> memory.v1.Entry
 	10,  // 25: memory.v1.ListEntriesResponse.page_info:type_name -> memory.v1.PageInfo
 	5,   // 26: memory.v1.AdminListEntriesRequest.channel:type_name -> memory.v1.Channel
 	9,   // 27: memory.v1.AdminListEntriesRequest.page:type_name -> memory.v1.PageRequest
-	5,   // 28: memory.v1.Entry.channel:type_name -> memory.v1.Channel
-	100, // 29: memory.v1.Entry.content:type_name -> google.protobuf.Value
-	9,   // 30: memory.v1.ListMembershipsRequest.page:type_name -> memory.v1.PageRequest
-	14,  // 31: memory.v1.ListMembershipsResponse.memberships:type_name -> memory.v1.ConversationMembership
-	10,  // 32: memory.v1.ListMembershipsResponse.page_info:type_name -> memory.v1.PageInfo
-	4,   // 33: memory.v1.ShareConversationRequest.access_level:type_name -> memory.v1.AccessLevel
-	4,   // 34: memory.v1.UpdateMembershipRequest.access_level:type_name -> memory.v1.AccessLevel
-	6,   // 35: memory.v1.ListOwnershipTransfersRequest.role:type_name -> memory.v1.TransferRole
-	9,   // 36: memory.v1.ListOwnershipTransfersRequest.page:type_name -> memory.v1.PageRequest
-	38,  // 37: memory.v1.ListOwnershipTransfersResponse.transfers:type_name -> memory.v1.OwnershipTransfer
-	10,  // 38: memory.v1.ListOwnershipTransfersResponse.page_info:type_name -> memory.v1.PageInfo
-	47,  // 39: memory.v1.SearchEntriesResponse.results:type_name -> memory.v1.SearchResult
-	32,  // 40: memory.v1.SearchResult.entry:type_name -> memory.v1.Entry
-	49,  // 41: memory.v1.IndexConversationsRequest.entries:type_name -> memory.v1.IndexEntryRequest
-	53,  // 42: memory.v1.ListUnindexedEntriesResponse.entries:type_name -> memory.v1.UnindexedEntry
-	32,  // 43: memory.v1.UnindexedEntry.entry:type_name -> memory.v1.Entry
-	99,  // 44: memory.v1.PutMemoryRequest.value:type_name -> google.protobuf.Struct
-	98,  // 45: memory.v1.PutMemoryRequest.index:type_name -> memory.v1.PutMemoryRequest.IndexEntry
-	62,  // 46: memory.v1.PutMemoryRequest.actor:type_name -> memory.v1.RequestActor
-	99,  // 47: memory.v1.MemoryWriteResult.attributes:type_name -> google.protobuf.Struct
-	2,   // 48: memory.v1.GetMemoryRequest.archived:type_name -> memory.v1.ArchiveFilter
-	62,  // 49: memory.v1.GetMemoryRequest.actor:type_name -> memory.v1.RequestActor
-	62,  // 50: memory.v1.UpdateMemoryRequest.actor:type_name -> memory.v1.RequestActor
-	99,  // 51: memory.v1.MemoryItem.value:type_name -> google.protobuf.Struct
-	99,  // 52: memory.v1.MemoryItem.attributes:type_name -> google.protobuf.Struct
-	66,  // 53: memory.v1.MemoryItem.usage:type_name -> memory.v1.MemoryUsage
-	99,  // 54: memory.v1.SearchMemoriesRequest.filter:type_name -> google.protobuf.Struct
-	2,   // 55: memory.v1.SearchMemoriesRequest.archived:type_name -> memory.v1.ArchiveFilter
-	62,  // 56: memory.v1.SearchMemoriesRequest.actor:type_name -> memory.v1.RequestActor
-	58,  // 57: memory.v1.SearchMemoriesResponse.items:type_name -> memory.v1.MemoryItem
-	2,   // 58: memory.v1.ListMemoryNamespacesRequest.archived:type_name -> memory.v1.ArchiveFilter
-	62,  // 59: memory.v1.ListMemoryNamespacesRequest.actor:type_name -> memory.v1.RequestActor
-	63,  // 60: memory.v1.ListMemoryNamespacesResponse.namespaces:type_name -> memory.v1.MemoryNamespace
-	101, // 61: memory.v1.MemoryUsage.last_fetched_at:type_name -> google.protobuf.Timestamp
-	7,   // 62: memory.v1.ListTopMemoryUsageRequest.sort:type_name -> memory.v1.MemoryUsageSort
-	66,  // 63: memory.v1.TopMemoryUsageItem.usage:type_name -> memory.v1.MemoryUsage
-	69,  // 64: memory.v1.ListTopMemoryUsageResponse.items:type_name -> memory.v1.TopMemoryUsageItem
-	72,  // 65: memory.v1.CapabilitiesResponse.tech:type_name -> memory.v1.CapabilitiesTech
-	73,  // 66: memory.v1.CapabilitiesResponse.features:type_name -> memory.v1.CapabilitiesFeatures
-	74,  // 67: memory.v1.CapabilitiesResponse.auth:type_name -> memory.v1.CapabilitiesAuth
-	75,  // 68: memory.v1.CapabilitiesResponse.security:type_name -> memory.v1.CapabilitiesSecurity
-	8,   // 69: memory.v1.RecordResponse.status:type_name -> memory.v1.RecordStatus
-	87,  // 70: memory.v1.UploadAttachmentRequest.metadata:type_name -> memory.v1.UploadMetadata
-	90,  // 71: memory.v1.DownloadAttachmentResponse.metadata:type_name -> memory.v1.AttachmentInfo
-	100, // 72: memory.v1.PutCheckpointRequest.value:type_name -> google.protobuf.Value
-	100, // 73: memory.v1.AdminCheckpoint.value:type_name -> google.protobuf.Value
-	101, // 74: memory.v1.AdminCheckpoint.updated_at:type_name -> google.protobuf.Timestamp
-	3,   // 75: memory.v1.SubscribeEventsRequest.scope:type_name -> memory.v1.EventScope
-	102, // 76: memory.v1.SystemService.GetHealth:input_type -> google.protobuf.Empty
-	102, // 77: memory.v1.SystemService.GetCapabilities:input_type -> google.protobuf.Empty
-	17,  // 78: memory.v1.ConversationsService.ListConversations:input_type -> memory.v1.ListConversationsRequest
-	16,  // 79: memory.v1.ConversationsService.CreateConversation:input_type -> memory.v1.CreateConversationRequest
-	19,  // 80: memory.v1.ConversationsService.GetConversation:input_type -> memory.v1.GetConversationRequest
-	20,  // 81: memory.v1.ConversationsService.UpdateConversation:input_type -> memory.v1.UpdateConversationRequest
-	21,  // 82: memory.v1.ConversationsService.ListForks:input_type -> memory.v1.ListForksRequest
-	23,  // 83: memory.v1.ConversationsService.ListChildConversations:input_type -> memory.v1.ListChildConversationsRequest
-	33,  // 84: memory.v1.ConversationMembershipsService.ListMemberships:input_type -> memory.v1.ListMembershipsRequest
-	35,  // 85: memory.v1.ConversationMembershipsService.ShareConversation:input_type -> memory.v1.ShareConversationRequest
-	36,  // 86: memory.v1.ConversationMembershipsService.UpdateMembership:input_type -> memory.v1.UpdateMembershipRequest
-	37,  // 87: memory.v1.ConversationMembershipsService.DeleteMembership:input_type -> memory.v1.DeleteMembershipRequest
-	39,  // 88: memory.v1.OwnershipTransfersService.ListOwnershipTransfers:input_type -> memory.v1.ListOwnershipTransfersRequest
-	41,  // 89: memory.v1.OwnershipTransfersService.GetOwnershipTransfer:input_type -> memory.v1.GetOwnershipTransferRequest
-	42,  // 90: memory.v1.OwnershipTransfersService.CreateOwnershipTransfer:input_type -> memory.v1.CreateOwnershipTransferRequest
-	43,  // 91: memory.v1.OwnershipTransfersService.AcceptOwnershipTransfer:input_type -> memory.v1.AcceptOwnershipTransferRequest
-	44,  // 92: memory.v1.OwnershipTransfersService.DeleteOwnershipTransfer:input_type -> memory.v1.DeleteOwnershipTransferRequest
-	29,  // 93: memory.v1.EntriesService.ListEntries:input_type -> memory.v1.ListEntriesRequest
-	28,  // 94: memory.v1.EntriesService.AppendEntry:input_type -> memory.v1.AppendEntryRequest
-	26,  // 95: memory.v1.EntriesService.SyncEntries:input_type -> memory.v1.SyncEntriesRequest
-	31,  // 96: memory.v1.AdminEntriesService.ListEntries:input_type -> memory.v1.AdminListEntriesRequest
-	45,  // 97: memory.v1.SearchService.SearchConversations:input_type -> memory.v1.SearchEntriesRequest
-	48,  // 98: memory.v1.SearchService.IndexConversations:input_type -> memory.v1.IndexConversationsRequest
-	51,  // 99: memory.v1.SearchService.ListUnindexedEntries:input_type -> memory.v1.ListUnindexedEntriesRequest
-	54,  // 100: memory.v1.MemoriesService.PutMemory:input_type -> memory.v1.PutMemoryRequest
-	56,  // 101: memory.v1.MemoriesService.GetMemory:input_type -> memory.v1.GetMemoryRequest
-	57,  // 102: memory.v1.MemoriesService.UpdateMemory:input_type -> memory.v1.UpdateMemoryRequest
-	59,  // 103: memory.v1.MemoriesService.SearchMemories:input_type -> memory.v1.SearchMemoriesRequest
-	61,  // 104: memory.v1.MemoriesService.ListMemoryNamespaces:input_type -> memory.v1.ListMemoryNamespacesRequest
-	102, // 105: memory.v1.MemoriesService.GetMemoryIndexStatus:input_type -> google.protobuf.Empty
-	67,  // 106: memory.v1.MemoriesService.GetMemoryUsage:input_type -> memory.v1.GetMemoryUsageRequest
-	68,  // 107: memory.v1.MemoriesService.ListTopMemoryUsage:input_type -> memory.v1.ListTopMemoryUsageRequest
-	77,  // 108: memory.v1.ResponseRecorderService.Record:input_type -> memory.v1.RecordRequest
-	79,  // 109: memory.v1.ResponseRecorderService.Replay:input_type -> memory.v1.ReplayRequest
-	81,  // 110: memory.v1.ResponseRecorderService.Cancel:input_type -> memory.v1.CancelRecordRequest
-	102, // 111: memory.v1.ResponseRecorderService.IsEnabled:input_type -> google.protobuf.Empty
-	84,  // 112: memory.v1.ResponseRecorderService.CheckRecordings:input_type -> memory.v1.CheckRecordingsRequest
-	86,  // 113: memory.v1.AttachmentsService.UploadAttachment:input_type -> memory.v1.UploadAttachmentRequest
-	89,  // 114: memory.v1.AttachmentsService.GetAttachment:input_type -> memory.v1.GetAttachmentRequest
-	91,  // 115: memory.v1.AttachmentsService.DownloadAttachment:input_type -> memory.v1.DownloadAttachmentRequest
-	96,  // 116: memory.v1.EventStreamService.SubscribeEvents:input_type -> memory.v1.SubscribeEventsRequest
-	93,  // 117: memory.v1.AdminCheckpointService.GetCheckpoint:input_type -> memory.v1.GetCheckpointRequest
-	94,  // 118: memory.v1.AdminCheckpointService.PutCheckpoint:input_type -> memory.v1.PutCheckpointRequest
-	71,  // 119: memory.v1.SystemService.GetHealth:output_type -> memory.v1.HealthResponse
-	76,  // 120: memory.v1.SystemService.GetCapabilities:output_type -> memory.v1.CapabilitiesResponse
-	18,  // 121: memory.v1.ConversationsService.ListConversations:output_type -> memory.v1.ListConversationsResponse
-	13,  // 122: memory.v1.ConversationsService.CreateConversation:output_type -> memory.v1.Conversation
-	13,  // 123: memory.v1.ConversationsService.GetConversation:output_type -> memory.v1.Conversation
-	13,  // 124: memory.v1.ConversationsService.UpdateConversation:output_type -> memory.v1.Conversation
-	22,  // 125: memory.v1.ConversationsService.ListForks:output_type -> memory.v1.ListForksResponse
-	24,  // 126: memory.v1.ConversationsService.ListChildConversations:output_type -> memory.v1.ListChildConversationsResponse
-	34,  // 127: memory.v1.ConversationMembershipsService.ListMemberships:output_type -> memory.v1.ListMembershipsResponse
-	14,  // 128: memory.v1.ConversationMembershipsService.ShareConversation:output_type -> memory.v1.ConversationMembership
-	14,  // 129: memory.v1.ConversationMembershipsService.UpdateMembership:output_type -> memory.v1.ConversationMembership
-	102, // 130: memory.v1.ConversationMembershipsService.DeleteMembership:output_type -> google.protobuf.Empty
-	40,  // 131: memory.v1.OwnershipTransfersService.ListOwnershipTransfers:output_type -> memory.v1.ListOwnershipTransfersResponse
-	38,  // 132: memory.v1.OwnershipTransfersService.GetOwnershipTransfer:output_type -> memory.v1.OwnershipTransfer
-	38,  // 133: memory.v1.OwnershipTransfersService.CreateOwnershipTransfer:output_type -> memory.v1.OwnershipTransfer
-	102, // 134: memory.v1.OwnershipTransfersService.AcceptOwnershipTransfer:output_type -> google.protobuf.Empty
-	102, // 135: memory.v1.OwnershipTransfersService.DeleteOwnershipTransfer:output_type -> google.protobuf.Empty
-	30,  // 136: memory.v1.EntriesService.ListEntries:output_type -> memory.v1.ListEntriesResponse
-	32,  // 137: memory.v1.EntriesService.AppendEntry:output_type -> memory.v1.Entry
-	27,  // 138: memory.v1.EntriesService.SyncEntries:output_type -> memory.v1.SyncEntriesResponse
-	30,  // 139: memory.v1.AdminEntriesService.ListEntries:output_type -> memory.v1.ListEntriesResponse
-	46,  // 140: memory.v1.SearchService.SearchConversations:output_type -> memory.v1.SearchEntriesResponse
-	50,  // 141: memory.v1.SearchService.IndexConversations:output_type -> memory.v1.IndexConversationsResponse
-	52,  // 142: memory.v1.SearchService.ListUnindexedEntries:output_type -> memory.v1.ListUnindexedEntriesResponse
-	55,  // 143: memory.v1.MemoriesService.PutMemory:output_type -> memory.v1.MemoryWriteResult
-	58,  // 144: memory.v1.MemoriesService.GetMemory:output_type -> memory.v1.MemoryItem
-	102, // 145: memory.v1.MemoriesService.UpdateMemory:output_type -> google.protobuf.Empty
-	60,  // 146: memory.v1.MemoriesService.SearchMemories:output_type -> memory.v1.SearchMemoriesResponse
-	64,  // 147: memory.v1.MemoriesService.ListMemoryNamespaces:output_type -> memory.v1.ListMemoryNamespacesResponse
-	65,  // 148: memory.v1.MemoriesService.GetMemoryIndexStatus:output_type -> memory.v1.MemoryIndexStatusResponse
-	66,  // 149: memory.v1.MemoriesService.GetMemoryUsage:output_type -> memory.v1.MemoryUsage
-	70,  // 150: memory.v1.MemoriesService.ListTopMemoryUsage:output_type -> memory.v1.ListTopMemoryUsageResponse
-	78,  // 151: memory.v1.ResponseRecorderService.Record:output_type -> memory.v1.RecordResponse
-	80,  // 152: memory.v1.ResponseRecorderService.Replay:output_type -> memory.v1.ReplayResponse
-	82,  // 153: memory.v1.ResponseRecorderService.Cancel:output_type -> memory.v1.CancelRecordResponse
-	83,  // 154: memory.v1.ResponseRecorderService.IsEnabled:output_type -> memory.v1.IsEnabledResponse
-	85,  // 155: memory.v1.ResponseRecorderService.CheckRecordings:output_type -> memory.v1.CheckRecordingsResponse
-	88,  // 156: memory.v1.AttachmentsService.UploadAttachment:output_type -> memory.v1.UploadAttachmentResponse
-	90,  // 157: memory.v1.AttachmentsService.GetAttachment:output_type -> memory.v1.AttachmentInfo
-	92,  // 158: memory.v1.AttachmentsService.DownloadAttachment:output_type -> memory.v1.DownloadAttachmentResponse
-	97,  // 159: memory.v1.EventStreamService.SubscribeEvents:output_type -> memory.v1.EventNotification
-	95,  // 160: memory.v1.AdminCheckpointService.GetCheckpoint:output_type -> memory.v1.AdminCheckpoint
-	95,  // 161: memory.v1.AdminCheckpointService.PutCheckpoint:output_type -> memory.v1.AdminCheckpoint
-	119, // [119:162] is the sub-list for method output_type
-	76,  // [76:119] is the sub-list for method input_type
-	76,  // [76:76] is the sub-list for extension type_name
-	76,  // [76:76] is the sub-list for extension extendee
-	0,   // [0:76] is the sub-list for field type_name
+	9,   // 28: memory.v1.AdminListConversationsRequest.page:type_name -> memory.v1.PageRequest
+	2,   // 29: memory.v1.AdminListConversationsRequest.archived:type_name -> memory.v1.ArchiveFilter
+	0,   // 30: memory.v1.AdminListConversationsRequest.mode:type_name -> memory.v1.ConversationListMode
+	1,   // 31: memory.v1.AdminListConversationsRequest.ancestry:type_name -> memory.v1.ConversationAncestryFilter
+	11,  // 32: memory.v1.AdminListConversationsResponse.conversations:type_name -> memory.v1.ConversationSummary
+	10,  // 33: memory.v1.AdminListConversationsResponse.page_info:type_name -> memory.v1.PageInfo
+	9,   // 34: memory.v1.AdminListMembershipsRequest.page:type_name -> memory.v1.PageRequest
+	9,   // 35: memory.v1.AdminListForksRequest.page:type_name -> memory.v1.PageRequest
+	15,  // 36: memory.v1.AdminListForksResponse.forks:type_name -> memory.v1.ConversationForkSummary
+	10,  // 37: memory.v1.AdminListForksResponse.page_info:type_name -> memory.v1.PageInfo
+	9,   // 38: memory.v1.AdminListChildConversationsRequest.page:type_name -> memory.v1.PageRequest
+	12,  // 39: memory.v1.AdminListChildConversationsResponse.children:type_name -> memory.v1.ChildConversationSummary
+	10,  // 40: memory.v1.AdminListChildConversationsResponse.page_info:type_name -> memory.v1.PageInfo
+	5,   // 41: memory.v1.Entry.channel:type_name -> memory.v1.Channel
+	109, // 42: memory.v1.Entry.content:type_name -> google.protobuf.Value
+	9,   // 43: memory.v1.ListMembershipsRequest.page:type_name -> memory.v1.PageRequest
+	14,  // 44: memory.v1.ListMembershipsResponse.memberships:type_name -> memory.v1.ConversationMembership
+	10,  // 45: memory.v1.ListMembershipsResponse.page_info:type_name -> memory.v1.PageInfo
+	4,   // 46: memory.v1.ShareConversationRequest.access_level:type_name -> memory.v1.AccessLevel
+	4,   // 47: memory.v1.UpdateMembershipRequest.access_level:type_name -> memory.v1.AccessLevel
+	6,   // 48: memory.v1.ListOwnershipTransfersRequest.role:type_name -> memory.v1.TransferRole
+	9,   // 49: memory.v1.ListOwnershipTransfersRequest.page:type_name -> memory.v1.PageRequest
+	47,  // 50: memory.v1.ListOwnershipTransfersResponse.transfers:type_name -> memory.v1.OwnershipTransfer
+	10,  // 51: memory.v1.ListOwnershipTransfersResponse.page_info:type_name -> memory.v1.PageInfo
+	56,  // 52: memory.v1.SearchEntriesResponse.results:type_name -> memory.v1.SearchResult
+	41,  // 53: memory.v1.SearchResult.entry:type_name -> memory.v1.Entry
+	58,  // 54: memory.v1.IndexConversationsRequest.entries:type_name -> memory.v1.IndexEntryRequest
+	62,  // 55: memory.v1.ListUnindexedEntriesResponse.entries:type_name -> memory.v1.UnindexedEntry
+	41,  // 56: memory.v1.UnindexedEntry.entry:type_name -> memory.v1.Entry
+	108, // 57: memory.v1.PutMemoryRequest.value:type_name -> google.protobuf.Struct
+	107, // 58: memory.v1.PutMemoryRequest.index:type_name -> memory.v1.PutMemoryRequest.IndexEntry
+	71,  // 59: memory.v1.PutMemoryRequest.actor:type_name -> memory.v1.RequestActor
+	108, // 60: memory.v1.MemoryWriteResult.attributes:type_name -> google.protobuf.Struct
+	2,   // 61: memory.v1.GetMemoryRequest.archived:type_name -> memory.v1.ArchiveFilter
+	71,  // 62: memory.v1.GetMemoryRequest.actor:type_name -> memory.v1.RequestActor
+	71,  // 63: memory.v1.UpdateMemoryRequest.actor:type_name -> memory.v1.RequestActor
+	108, // 64: memory.v1.MemoryItem.value:type_name -> google.protobuf.Struct
+	108, // 65: memory.v1.MemoryItem.attributes:type_name -> google.protobuf.Struct
+	75,  // 66: memory.v1.MemoryItem.usage:type_name -> memory.v1.MemoryUsage
+	108, // 67: memory.v1.SearchMemoriesRequest.filter:type_name -> google.protobuf.Struct
+	2,   // 68: memory.v1.SearchMemoriesRequest.archived:type_name -> memory.v1.ArchiveFilter
+	71,  // 69: memory.v1.SearchMemoriesRequest.actor:type_name -> memory.v1.RequestActor
+	67,  // 70: memory.v1.SearchMemoriesResponse.items:type_name -> memory.v1.MemoryItem
+	2,   // 71: memory.v1.ListMemoryNamespacesRequest.archived:type_name -> memory.v1.ArchiveFilter
+	71,  // 72: memory.v1.ListMemoryNamespacesRequest.actor:type_name -> memory.v1.RequestActor
+	72,  // 73: memory.v1.ListMemoryNamespacesResponse.namespaces:type_name -> memory.v1.MemoryNamespace
+	110, // 74: memory.v1.MemoryUsage.last_fetched_at:type_name -> google.protobuf.Timestamp
+	7,   // 75: memory.v1.ListTopMemoryUsageRequest.sort:type_name -> memory.v1.MemoryUsageSort
+	75,  // 76: memory.v1.TopMemoryUsageItem.usage:type_name -> memory.v1.MemoryUsage
+	78,  // 77: memory.v1.ListTopMemoryUsageResponse.items:type_name -> memory.v1.TopMemoryUsageItem
+	81,  // 78: memory.v1.CapabilitiesResponse.tech:type_name -> memory.v1.CapabilitiesTech
+	82,  // 79: memory.v1.CapabilitiesResponse.features:type_name -> memory.v1.CapabilitiesFeatures
+	83,  // 80: memory.v1.CapabilitiesResponse.auth:type_name -> memory.v1.CapabilitiesAuth
+	84,  // 81: memory.v1.CapabilitiesResponse.security:type_name -> memory.v1.CapabilitiesSecurity
+	8,   // 82: memory.v1.RecordResponse.status:type_name -> memory.v1.RecordStatus
+	96,  // 83: memory.v1.UploadAttachmentRequest.metadata:type_name -> memory.v1.UploadMetadata
+	99,  // 84: memory.v1.DownloadAttachmentResponse.metadata:type_name -> memory.v1.AttachmentInfo
+	109, // 85: memory.v1.PutCheckpointRequest.value:type_name -> google.protobuf.Value
+	109, // 86: memory.v1.AdminCheckpoint.value:type_name -> google.protobuf.Value
+	110, // 87: memory.v1.AdminCheckpoint.updated_at:type_name -> google.protobuf.Timestamp
+	3,   // 88: memory.v1.SubscribeEventsRequest.scope:type_name -> memory.v1.EventScope
+	111, // 89: memory.v1.SystemService.GetHealth:input_type -> google.protobuf.Empty
+	111, // 90: memory.v1.SystemService.GetCapabilities:input_type -> google.protobuf.Empty
+	17,  // 91: memory.v1.ConversationsService.ListConversations:input_type -> memory.v1.ListConversationsRequest
+	16,  // 92: memory.v1.ConversationsService.CreateConversation:input_type -> memory.v1.CreateConversationRequest
+	19,  // 93: memory.v1.ConversationsService.GetConversation:input_type -> memory.v1.GetConversationRequest
+	20,  // 94: memory.v1.ConversationsService.UpdateConversation:input_type -> memory.v1.UpdateConversationRequest
+	21,  // 95: memory.v1.ConversationsService.ListForks:input_type -> memory.v1.ListForksRequest
+	23,  // 96: memory.v1.ConversationsService.ListChildConversations:input_type -> memory.v1.ListChildConversationsRequest
+	42,  // 97: memory.v1.ConversationMembershipsService.ListMemberships:input_type -> memory.v1.ListMembershipsRequest
+	44,  // 98: memory.v1.ConversationMembershipsService.ShareConversation:input_type -> memory.v1.ShareConversationRequest
+	45,  // 99: memory.v1.ConversationMembershipsService.UpdateMembership:input_type -> memory.v1.UpdateMembershipRequest
+	46,  // 100: memory.v1.ConversationMembershipsService.DeleteMembership:input_type -> memory.v1.DeleteMembershipRequest
+	48,  // 101: memory.v1.OwnershipTransfersService.ListOwnershipTransfers:input_type -> memory.v1.ListOwnershipTransfersRequest
+	50,  // 102: memory.v1.OwnershipTransfersService.GetOwnershipTransfer:input_type -> memory.v1.GetOwnershipTransferRequest
+	51,  // 103: memory.v1.OwnershipTransfersService.CreateOwnershipTransfer:input_type -> memory.v1.CreateOwnershipTransferRequest
+	52,  // 104: memory.v1.OwnershipTransfersService.AcceptOwnershipTransfer:input_type -> memory.v1.AcceptOwnershipTransferRequest
+	53,  // 105: memory.v1.OwnershipTransfersService.DeleteOwnershipTransfer:input_type -> memory.v1.DeleteOwnershipTransferRequest
+	29,  // 106: memory.v1.EntriesService.ListEntries:input_type -> memory.v1.ListEntriesRequest
+	28,  // 107: memory.v1.EntriesService.AppendEntry:input_type -> memory.v1.AppendEntryRequest
+	26,  // 108: memory.v1.EntriesService.SyncEntries:input_type -> memory.v1.SyncEntriesRequest
+	31,  // 109: memory.v1.AdminEntriesService.ListEntries:input_type -> memory.v1.AdminListEntriesRequest
+	32,  // 110: memory.v1.AdminConversationsService.GetConversation:input_type -> memory.v1.AdminGetConversationRequest
+	33,  // 111: memory.v1.AdminConversationsService.ListConversations:input_type -> memory.v1.AdminListConversationsRequest
+	35,  // 112: memory.v1.AdminConversationsService.UpdateConversation:input_type -> memory.v1.AdminUpdateConversationRequest
+	36,  // 113: memory.v1.AdminConversationsService.ListMemberships:input_type -> memory.v1.AdminListMembershipsRequest
+	37,  // 114: memory.v1.AdminConversationsService.ListForks:input_type -> memory.v1.AdminListForksRequest
+	39,  // 115: memory.v1.AdminConversationsService.ListChildConversations:input_type -> memory.v1.AdminListChildConversationsRequest
+	54,  // 116: memory.v1.SearchService.SearchConversations:input_type -> memory.v1.SearchEntriesRequest
+	57,  // 117: memory.v1.SearchService.IndexConversations:input_type -> memory.v1.IndexConversationsRequest
+	60,  // 118: memory.v1.SearchService.ListUnindexedEntries:input_type -> memory.v1.ListUnindexedEntriesRequest
+	63,  // 119: memory.v1.MemoriesService.PutMemory:input_type -> memory.v1.PutMemoryRequest
+	65,  // 120: memory.v1.MemoriesService.GetMemory:input_type -> memory.v1.GetMemoryRequest
+	66,  // 121: memory.v1.MemoriesService.UpdateMemory:input_type -> memory.v1.UpdateMemoryRequest
+	68,  // 122: memory.v1.MemoriesService.SearchMemories:input_type -> memory.v1.SearchMemoriesRequest
+	70,  // 123: memory.v1.MemoriesService.ListMemoryNamespaces:input_type -> memory.v1.ListMemoryNamespacesRequest
+	111, // 124: memory.v1.MemoriesService.GetMemoryIndexStatus:input_type -> google.protobuf.Empty
+	76,  // 125: memory.v1.MemoriesService.GetMemoryUsage:input_type -> memory.v1.GetMemoryUsageRequest
+	77,  // 126: memory.v1.MemoriesService.ListTopMemoryUsage:input_type -> memory.v1.ListTopMemoryUsageRequest
+	86,  // 127: memory.v1.ResponseRecorderService.Record:input_type -> memory.v1.RecordRequest
+	88,  // 128: memory.v1.ResponseRecorderService.Replay:input_type -> memory.v1.ReplayRequest
+	90,  // 129: memory.v1.ResponseRecorderService.Cancel:input_type -> memory.v1.CancelRecordRequest
+	111, // 130: memory.v1.ResponseRecorderService.IsEnabled:input_type -> google.protobuf.Empty
+	93,  // 131: memory.v1.ResponseRecorderService.CheckRecordings:input_type -> memory.v1.CheckRecordingsRequest
+	95,  // 132: memory.v1.AttachmentsService.UploadAttachment:input_type -> memory.v1.UploadAttachmentRequest
+	98,  // 133: memory.v1.AttachmentsService.GetAttachment:input_type -> memory.v1.GetAttachmentRequest
+	100, // 134: memory.v1.AttachmentsService.DownloadAttachment:input_type -> memory.v1.DownloadAttachmentRequest
+	105, // 135: memory.v1.EventStreamService.SubscribeEvents:input_type -> memory.v1.SubscribeEventsRequest
+	102, // 136: memory.v1.AdminCheckpointService.GetCheckpoint:input_type -> memory.v1.GetCheckpointRequest
+	103, // 137: memory.v1.AdminCheckpointService.PutCheckpoint:input_type -> memory.v1.PutCheckpointRequest
+	80,  // 138: memory.v1.SystemService.GetHealth:output_type -> memory.v1.HealthResponse
+	85,  // 139: memory.v1.SystemService.GetCapabilities:output_type -> memory.v1.CapabilitiesResponse
+	18,  // 140: memory.v1.ConversationsService.ListConversations:output_type -> memory.v1.ListConversationsResponse
+	13,  // 141: memory.v1.ConversationsService.CreateConversation:output_type -> memory.v1.Conversation
+	13,  // 142: memory.v1.ConversationsService.GetConversation:output_type -> memory.v1.Conversation
+	13,  // 143: memory.v1.ConversationsService.UpdateConversation:output_type -> memory.v1.Conversation
+	22,  // 144: memory.v1.ConversationsService.ListForks:output_type -> memory.v1.ListForksResponse
+	24,  // 145: memory.v1.ConversationsService.ListChildConversations:output_type -> memory.v1.ListChildConversationsResponse
+	43,  // 146: memory.v1.ConversationMembershipsService.ListMemberships:output_type -> memory.v1.ListMembershipsResponse
+	14,  // 147: memory.v1.ConversationMembershipsService.ShareConversation:output_type -> memory.v1.ConversationMembership
+	14,  // 148: memory.v1.ConversationMembershipsService.UpdateMembership:output_type -> memory.v1.ConversationMembership
+	111, // 149: memory.v1.ConversationMembershipsService.DeleteMembership:output_type -> google.protobuf.Empty
+	49,  // 150: memory.v1.OwnershipTransfersService.ListOwnershipTransfers:output_type -> memory.v1.ListOwnershipTransfersResponse
+	47,  // 151: memory.v1.OwnershipTransfersService.GetOwnershipTransfer:output_type -> memory.v1.OwnershipTransfer
+	47,  // 152: memory.v1.OwnershipTransfersService.CreateOwnershipTransfer:output_type -> memory.v1.OwnershipTransfer
+	111, // 153: memory.v1.OwnershipTransfersService.AcceptOwnershipTransfer:output_type -> google.protobuf.Empty
+	111, // 154: memory.v1.OwnershipTransfersService.DeleteOwnershipTransfer:output_type -> google.protobuf.Empty
+	30,  // 155: memory.v1.EntriesService.ListEntries:output_type -> memory.v1.ListEntriesResponse
+	41,  // 156: memory.v1.EntriesService.AppendEntry:output_type -> memory.v1.Entry
+	27,  // 157: memory.v1.EntriesService.SyncEntries:output_type -> memory.v1.SyncEntriesResponse
+	30,  // 158: memory.v1.AdminEntriesService.ListEntries:output_type -> memory.v1.ListEntriesResponse
+	13,  // 159: memory.v1.AdminConversationsService.GetConversation:output_type -> memory.v1.Conversation
+	34,  // 160: memory.v1.AdminConversationsService.ListConversations:output_type -> memory.v1.AdminListConversationsResponse
+	13,  // 161: memory.v1.AdminConversationsService.UpdateConversation:output_type -> memory.v1.Conversation
+	43,  // 162: memory.v1.AdminConversationsService.ListMemberships:output_type -> memory.v1.ListMembershipsResponse
+	38,  // 163: memory.v1.AdminConversationsService.ListForks:output_type -> memory.v1.AdminListForksResponse
+	40,  // 164: memory.v1.AdminConversationsService.ListChildConversations:output_type -> memory.v1.AdminListChildConversationsResponse
+	55,  // 165: memory.v1.SearchService.SearchConversations:output_type -> memory.v1.SearchEntriesResponse
+	59,  // 166: memory.v1.SearchService.IndexConversations:output_type -> memory.v1.IndexConversationsResponse
+	61,  // 167: memory.v1.SearchService.ListUnindexedEntries:output_type -> memory.v1.ListUnindexedEntriesResponse
+	64,  // 168: memory.v1.MemoriesService.PutMemory:output_type -> memory.v1.MemoryWriteResult
+	67,  // 169: memory.v1.MemoriesService.GetMemory:output_type -> memory.v1.MemoryItem
+	111, // 170: memory.v1.MemoriesService.UpdateMemory:output_type -> google.protobuf.Empty
+	69,  // 171: memory.v1.MemoriesService.SearchMemories:output_type -> memory.v1.SearchMemoriesResponse
+	73,  // 172: memory.v1.MemoriesService.ListMemoryNamespaces:output_type -> memory.v1.ListMemoryNamespacesResponse
+	74,  // 173: memory.v1.MemoriesService.GetMemoryIndexStatus:output_type -> memory.v1.MemoryIndexStatusResponse
+	75,  // 174: memory.v1.MemoriesService.GetMemoryUsage:output_type -> memory.v1.MemoryUsage
+	79,  // 175: memory.v1.MemoriesService.ListTopMemoryUsage:output_type -> memory.v1.ListTopMemoryUsageResponse
+	87,  // 176: memory.v1.ResponseRecorderService.Record:output_type -> memory.v1.RecordResponse
+	89,  // 177: memory.v1.ResponseRecorderService.Replay:output_type -> memory.v1.ReplayResponse
+	91,  // 178: memory.v1.ResponseRecorderService.Cancel:output_type -> memory.v1.CancelRecordResponse
+	92,  // 179: memory.v1.ResponseRecorderService.IsEnabled:output_type -> memory.v1.IsEnabledResponse
+	94,  // 180: memory.v1.ResponseRecorderService.CheckRecordings:output_type -> memory.v1.CheckRecordingsResponse
+	97,  // 181: memory.v1.AttachmentsService.UploadAttachment:output_type -> memory.v1.UploadAttachmentResponse
+	99,  // 182: memory.v1.AttachmentsService.GetAttachment:output_type -> memory.v1.AttachmentInfo
+	101, // 183: memory.v1.AttachmentsService.DownloadAttachment:output_type -> memory.v1.DownloadAttachmentResponse
+	106, // 184: memory.v1.EventStreamService.SubscribeEvents:output_type -> memory.v1.EventNotification
+	104, // 185: memory.v1.AdminCheckpointService.GetCheckpoint:output_type -> memory.v1.AdminCheckpoint
+	104, // 186: memory.v1.AdminCheckpointService.PutCheckpoint:output_type -> memory.v1.AdminCheckpoint
+	138, // [138:187] is the sub-list for method output_type
+	89,  // [89:138] is the sub-list for method input_type
+	89,  // [89:89] is the sub-list for extension type_name
+	89,  // [89:89] is the sub-list for extension extendee
+	0,   // [0:89] is the sub-list for field type_name
 }
 
 func init() { file_memory_v1_memory_service_proto_init() }
@@ -7174,36 +7766,38 @@ func file_memory_v1_memory_service_proto_init() {
 	file_memory_v1_memory_service_proto_msgTypes[18].OneofWrappers = []any{}
 	file_memory_v1_memory_service_proto_msgTypes[20].OneofWrappers = []any{}
 	file_memory_v1_memory_service_proto_msgTypes[22].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[36].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[42].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[43].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[24].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[26].OneofWrappers = []any{}
 	file_memory_v1_memory_service_proto_msgTypes[45].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[46].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[47].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[48].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[49].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[50].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[51].OneofWrappers = []any{}
 	file_memory_v1_memory_service_proto_msgTypes[52].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[53].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[77].OneofWrappers = []any{
+	file_memory_v1_memory_service_proto_msgTypes[54].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[55].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[56].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[57].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[58].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[59].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[61].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[62].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[86].OneofWrappers = []any{
 		(*UploadAttachmentRequest_Metadata)(nil),
 		(*UploadAttachmentRequest_Chunk)(nil),
 	}
-	file_memory_v1_memory_service_proto_msgTypes[83].OneofWrappers = []any{
+	file_memory_v1_memory_service_proto_msgTypes[92].OneofWrappers = []any{
 		(*DownloadAttachmentResponse_Metadata)(nil),
 		(*DownloadAttachmentResponse_Chunk)(nil),
 	}
-	file_memory_v1_memory_service_proto_msgTypes[87].OneofWrappers = []any{}
-	file_memory_v1_memory_service_proto_msgTypes[88].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[96].OneofWrappers = []any{}
+	file_memory_v1_memory_service_proto_msgTypes[97].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_memory_v1_memory_service_proto_rawDesc), len(file_memory_v1_memory_service_proto_rawDesc)),
 			NumEnums:      9,
-			NumMessages:   90,
+			NumMessages:   99,
 			NumExtensions: 0,
-			NumServices:   12,
+			NumServices:   13,
 		},
 		GoTypes:           file_memory_v1_memory_service_proto_goTypes,
 		DependencyIndexes: file_memory_v1_memory_service_proto_depIdxs,
