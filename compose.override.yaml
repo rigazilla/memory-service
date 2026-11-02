@@ -1,0 +1,16 @@
+# Docker Compose override file for local development
+# This file overrides images to use locally built images
+# Usage: docker compose up (automatically merges with compose.yaml)
+
+services:
+
+  memory-service:
+    environment:
+      MEMORY_SERVICE_API_KEYS_ONERING: ${MEMORY_SERVICE_API_KEYS_ONERING:-one_ring_api_key}
+      MEMORY_SERVICE_TRUSTED_USER_ID_CLIENTS: ${MEMORY_SERVICE_TRUSTED_USER_ID_CLIENTS:-onering,cognition_processor,developer_frontend}
+      MEMORY_SERVICE_RATE_LIMIT_MODE: off
+
+  cognition-processor:
+    environment:
+      COGNITION_OPENAI_MODEL_NAME: gpt-4o-mini
+      COGNITION_OPENAI_BASE_URL: https://api.openai.com/v1
